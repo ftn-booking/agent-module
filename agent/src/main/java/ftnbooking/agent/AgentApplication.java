@@ -1,4 +1,4 @@
-package java.ftnbooking.agent;
+package ftnbooking.agent;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
