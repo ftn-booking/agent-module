@@ -36,7 +36,7 @@ public class CXFConfig {
 		Map<String, Object> outProps = new HashMap<String, Object>();
 		outProps.put(WSHandlerConstants.ACTION,
 				WSHandlerConstants.TIMESTAMP + " " + WSHandlerConstants.SIGNATURE + " " + WSHandlerConstants.ENCRYPT);
-		outProps.put(WSHandlerConstants.USER, "a1");
+		outProps.put(WSHandlerConstants.USER, "agent");
 		outProps.put(WSHandlerConstants.SIG_PROP_FILE, "client-crypto.properties");
 		outProps.put(WSHandlerConstants.ENC_PROP_FILE, "client-crypto.properties");
 		outProps.put(WSHandlerConstants.DEC_PROP_FILE, "client-crypto.properties");
