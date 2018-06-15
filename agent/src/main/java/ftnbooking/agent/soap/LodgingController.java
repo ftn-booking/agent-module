@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class LodgingController {
 	
 	@Autowired
-	private LodgingService lodgingService;//AccomodationWebServiceSoap accWebService;
+	private LodgingService lodgingService;
 	@GetMapping("/addLodging")
 	public Long testLocation() {
 		System.out.println("AAAA");

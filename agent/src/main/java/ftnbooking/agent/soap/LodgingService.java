@@ -8,13 +8,13 @@ import javax.xml.ws.RequestWrapper;
 import javax.xml.ws.ResponseWrapper;
 
 
-@WebService(name = "LodgingServiceSoap", targetNamespace = "http://soap.agent.ftnbooking")
+@WebService(name = "LodgingServiceSoap", targetNamespace = "https://soap.agent.ftnbooking")
 
 public interface LodgingService {
 	 @WebMethod
 	    @WebResult(targetNamespace = "")
-	    @RequestWrapper(localName = "addLodging", targetNamespace = "http://soap.agent.ftnbooking", className = "ftnbooking.agent.soap.AddLodging")
-	    @ResponseWrapper(localName = "addLodgingResponse", targetNamespace = "http://soap.agent.ftnbooking", className = "ftnbooking.agent.soap.AddLodgingResponse")
+	    @RequestWrapper(localName = "addLodging", targetNamespace = "https://soap.agent.ftnbooking", className = "ftnbooking.agent.soap.AddLodging")
+	    @ResponseWrapper(localName = "addLodgingResponse", targetNamespace = "https://soap.agent.ftnbooking", className = "ftnbooking.agent.soap.AddLodgingResponse")
 	    public Long addLodging(
 	        @WebParam(name = "arg0", targetNamespace = "")
 	        Lodging arg0);
