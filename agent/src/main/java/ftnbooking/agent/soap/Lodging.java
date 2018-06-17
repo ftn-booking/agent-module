@@ -1,10 +1,13 @@
 package ftnbooking.agent.soap;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Version;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -18,6 +21,7 @@ import javax.xml.bind.annotation.XmlType;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
+
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
     
@@ -39,6 +43,9 @@ public class Lodging {
 	@NotBlank
 	private String name;
 
+	@XmlElement(required = true)
+	private String address;
+	
 	@XmlElement(required = true)
 	@NotBlank
 	private String description;
@@ -80,6 +87,10 @@ public class Lodging {
 	@Enumerated(EnumType.STRING)
 	private FoodServiceType foodServiceType;
 
+	@XmlElement(required = true)
+	@ManyToOne(fetch = FetchType.EAGER,cascade=CascadeType.ALL)
+	private ApplicationUser agent;
+	
 	public Lodging() {}
 
 	public Lodging(String name,
@@ -218,6 +229,22 @@ public class Lodging {
 		this.foodServiceType = foodServiceType;
 	}
 
+	public ApplicationUser getAgent() {
+		return agent;
+	}
 
+	public void setAgent(ApplicationUser agent) {
+		this.agent = agent;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	
 
 }
