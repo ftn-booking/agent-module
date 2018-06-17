@@ -6,11 +6,10 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Version;
 import javax.validation.constraints.Max;
@@ -60,10 +59,6 @@ public class Lodging {
 	private int category;
 
 	@XmlElement(required = true)
-	@Enumerated(EnumType.STRING)
-	private LodgingType type;
-
-	@XmlElement(required = true)
 	@Max(5)
 	@Min(1)
 	private Integer rating;
@@ -73,23 +68,12 @@ public class Lodging {
 	private int numberOfBeds;
 
 	@XmlElement(required = true)
-	private boolean hasParking;
+	@ManyToMany(cascade = CascadeType.REMOVE)
+	private List<FeatureType> featureType;
 	
 	@XmlElement(required = true)
-	private boolean hasWifi;
-	
-	@XmlElement(required = true)
-	private boolean hasTv;
-	
-	@XmlElement(required = true)
-	private boolean hasKitchen;
-	
-	@XmlElement(required = true)
-	private boolean hasBathroom;
-
-	@XmlElement(required = true)
-	@Enumerated(EnumType.STRING)
-	private FoodServiceType foodServiceType;
+	@ManyToOne(fetch = FetchType.EAGER)
+	private LodgingType lodgingType;
 
 	@XmlElement(required = true)
 	@ElementCollection
@@ -102,28 +86,23 @@ public class Lodging {
 	public Lodging() {}
 
 	public Lodging(String name,
+			String address,
 			String description,
 			int category,
-			LodgingType type,
+			LodgingType lodgingType,
 			int numberOfBeds,
-			boolean hasParking,
-			boolean hasWifi,
-			boolean hasTv,
-			boolean hasKitchen,
-			boolean hasBathroom,
-			FoodServiceType foodServiceType) {
+			List<FeatureType> featureType,
+			ApplicationUser agent) {
 		this.name = name;
+		this.address = address;
 		this.description = description;
 		this.category = category;
-		this.type = type;
+		this.lodgingType = lodgingType;
 		this.numberOfBeds = numberOfBeds;
-		this.hasParking = hasParking;
-		this.hasWifi = hasWifi;
-		this.hasTv = hasTv;
-		this.hasKitchen = hasKitchen;
-		this.hasBathroom = hasBathroom;
-		this.foodServiceType = foodServiceType;
+		this.featureType = featureType;
+		this.agent = agent;
 	}
+
 
 	public Long getId() {
 		return id;
@@ -165,14 +144,6 @@ public class Lodging {
 		this.category = category;
 	}
 
-	public LodgingType getType() {
-		return type;
-	}
-
-	public void setType(LodgingType type) {
-		this.type = type;
-	}
-
 	public Integer getRating() {
 		return rating;
 	}
@@ -187,54 +158,6 @@ public class Lodging {
 
 	public void setNumberOfBeds(int numberOfBeds) {
 		this.numberOfBeds = numberOfBeds;
-	}
-
-	public boolean isHasParking() {
-		return hasParking;
-	}
-
-	public void setHasParking(boolean hasParking) {
-		this.hasParking = hasParking;
-	}
-
-	public boolean isHasWifi() {
-		return hasWifi;
-	}
-
-	public void setHasWifi(boolean hasWifi) {
-		this.hasWifi = hasWifi;
-	}
-
-	public boolean isHasTv() {
-		return hasTv;
-	}
-
-	public void setHasTv(boolean hasTv) {
-		this.hasTv = hasTv;
-	}
-
-	public boolean isHasKitchen() {
-		return hasKitchen;
-	}
-
-	public void setHasKitchen(boolean hasKitchen) {
-		this.hasKitchen = hasKitchen;
-	}
-
-	public boolean isHasBathroom() {
-		return hasBathroom;
-	}
-
-	public void setHasBathroom(boolean hasBathroom) {
-		this.hasBathroom = hasBathroom;
-	}
-
-	public FoodServiceType getFoodServiceType() {
-		return foodServiceType;
-	}
-
-	public void setFoodServiceType(FoodServiceType foodServiceType) {
-		this.foodServiceType = foodServiceType;
 	}
 
 	public ApplicationUser getAgent() {
@@ -259,6 +182,26 @@ public class Lodging {
 
 	public void setImagePaths(List<String> imagePaths) {
 		this.imagePaths = imagePaths;
+	}
+	
+	public void addImagePath(String imagePath) {
+		this.imagePaths.add(imagePath);
+	}
+
+	public List<FeatureType> getFeatureType() {
+		return featureType;
+	}
+
+	public void setFeatureType(List<FeatureType> featureType) {
+		this.featureType = featureType;
+	}
+
+	public LodgingType getLodgingType() {
+		return lodgingType;
+	}
+
+	public void setLodgingType(LodgingType lodgingType) {
+		this.lodgingType = lodgingType;
 	}
 
 	
