@@ -19,4 +19,24 @@ public interface LodgingService {
 	        @WebParam(name = "arg0", targetNamespace = "")
 	        Lodging arg0);
 
+	 @WebResult(targetNamespace = "")
+	    @RequestWrapper(localName = "reserveLodging", targetNamespace = "https://soap.agent.ftnbooking", className = "ftnbooking.agent.soap.ReserveLodging")
+	    @ResponseWrapper(localName = "reserveLodgingResponse", targetNamespace = "https://soap.agent.ftnbooking", className = "ftnbooking.agent.soap.ReserveLodgingResponse")
+	    public Long reserveLodging(
+	        @WebParam(name = "arg0", targetNamespace = "")
+	        Lodging arg0);
+	 
+	 @WebResult(targetNamespace = "")
+	    @RequestWrapper(localName = "freeLodging", targetNamespace = "https://soap.agent.ftnbooking", className = "ftnbooking.agent.soap.FreeLodging")
+	    @ResponseWrapper(localName = "freeLodgingResponse", targetNamespace = "https://soap.agent.ftnbooking", className = "ftnbooking.agent.soap.FreeLodgingResponse")
+	    public Long freeLodging(
+	        @WebParam(name = "arg0", targetNamespace = "")
+	        Lodging arg0);
+	 
+	 @WebResult(targetNamespace = "")
+	    @RequestWrapper(localName = "realizeReservation", targetNamespace = "https://soap.agent.ftnbooking", className = "ftnbooking.agent.soap.RealizeReservation")
+	    @ResponseWrapper(localName = "realizeReservationResponse", targetNamespace = "https://soap.agent.ftnbooking", className = "ftnbooking.agent.soap.RealizeReservationResponse")
+	    public Long realizeReservation(
+	        @WebParam(name = "arg0", targetNamespace = "")
+	        Lodging arg0);
 }

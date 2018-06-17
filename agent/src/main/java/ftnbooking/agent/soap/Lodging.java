@@ -1,6 +1,10 @@
 package ftnbooking.agent.soap;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.CascadeType;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -87,6 +91,10 @@ public class Lodging {
 	@Enumerated(EnumType.STRING)
 	private FoodServiceType foodServiceType;
 
+	@XmlElement(required = true)
+	@ElementCollection
+	private List<String> imagePaths = new ArrayList<String>();
+	
 	@XmlElement(required = true)
 	@ManyToOne(fetch = FetchType.EAGER,cascade=CascadeType.ALL)
 	private ApplicationUser agent;
@@ -245,6 +253,15 @@ public class Lodging {
 		this.address = address;
 	}
 
+	public List<String> getImagePaths() {
+		return imagePaths;
+	}
+
+	public void setImagePaths(List<String> imagePaths) {
+		this.imagePaths = imagePaths;
+	}
+
+	
 	
 
 }
