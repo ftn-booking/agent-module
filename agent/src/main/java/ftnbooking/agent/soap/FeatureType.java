@@ -23,6 +23,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlRootElement(name = "FeatureType")
 @Entity
 public class FeatureType {
+	@XmlElement(required = true)
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;

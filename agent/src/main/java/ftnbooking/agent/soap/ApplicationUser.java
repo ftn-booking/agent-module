@@ -21,6 +21,7 @@ import com.fasterxml.jackson.annotation.JsonProperty.Access;
 @XmlRootElement(name = "ApplicationUser")
 @Entity
 public class ApplicationUser {
+	@XmlElement(required = true)
 	@Id
 	@GeneratedValue
 	@JsonProperty(access = Access.READ_ONLY)

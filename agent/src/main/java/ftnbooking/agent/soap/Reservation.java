@@ -24,7 +24,7 @@ import com.fasterxml.jackson.annotation.JsonProperty.Access;
 @Entity
 public class Reservation {
 
-	
+	@XmlElement(required = true)
 	@Id
 	@GeneratedValue
 	@JsonProperty(access = Access.READ_ONLY)
