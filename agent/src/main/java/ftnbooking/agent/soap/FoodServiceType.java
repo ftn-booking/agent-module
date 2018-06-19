@@ -14,7 +14,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
 })
-@XmlRootElement(name = "FeatureType")
+@XmlRootElement(name = "FoodServiceType")
 @Entity
 public class FoodServiceType {
 	@XmlElement(required = true)
