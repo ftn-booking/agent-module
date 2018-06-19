@@ -76,6 +76,10 @@ public class Lodging {
 	private LodgingType lodgingType;
 
 	@XmlElement(required = true)
+	@ManyToOne(fetch = FetchType.EAGER)
+	private FoodServiceType foodServiceType;
+	
+	@XmlElement(required = true)
 	@ElementCollection
 	private List<String> imagePaths = new ArrayList<String>();
 	
@@ -90,6 +94,7 @@ public class Lodging {
 			String description,
 			int category,
 			LodgingType lodgingType,
+			FoodServiceType foodServiceType,
 			int numberOfBeds,
 			List<FeatureType> featureType,
 			ApplicationUser agent) {
@@ -98,6 +103,7 @@ public class Lodging {
 		this.description = description;
 		this.category = category;
 		this.lodgingType = lodgingType;
+		this.foodServiceType = foodServiceType;
 		this.numberOfBeds = numberOfBeds;
 		this.featureType = featureType;
 		this.agent = agent;
@@ -202,6 +208,14 @@ public class Lodging {
 
 	public void setLodgingType(LodgingType lodgingType) {
 		this.lodgingType = lodgingType;
+	}
+
+	public FoodServiceType getFoodServiceType() {
+		return foodServiceType;
+	}
+
+	public void setFoodServiceType(FoodServiceType foodServiceType) {
+		this.foodServiceType = foodServiceType;
 	}
 
 	
