@@ -21,6 +21,7 @@ public interface LodgingService {
 	        @WebParam(name = "arg0", targetNamespace = "")
 	        Lodging arg0);
 
+	 @WebMethod
 	 @WebResult(targetNamespace = "")
 	    @RequestWrapper(localName = "reserveLodging", targetNamespace = "https://soap.agent.ftnbooking", className = "ftnbooking.agent.soap.ReserveLodging")
 	    @ResponseWrapper(localName = "reserveLodgingResponse", targetNamespace = "https://soap.agent.ftnbooking", className = "ftnbooking.agent.soap.ReserveLodgingResponse")
@@ -28,6 +29,7 @@ public interface LodgingService {
 	        @WebParam(name = "arg0", targetNamespace = "")
 	        Reservation arg0);
 	 
+	 @WebMethod
 	 @WebResult(targetNamespace = "")
 	    @RequestWrapper(localName = "freeLodging", targetNamespace = "https://soap.agent.ftnbooking", className = "ftnbooking.agent.soap.FreeLodging")
 	    @ResponseWrapper(localName = "freeLodgingResponse", targetNamespace = "https://soap.agent.ftnbooking", className = "ftnbooking.agent.soap.FreeLodgingResponse")
@@ -35,6 +37,7 @@ public interface LodgingService {
 	        @WebParam(name = "arg0", targetNamespace = "")
 	        Reservation arg0);
 	 
+	 @WebMethod
 	 @WebResult(targetNamespace = "")
 	    @RequestWrapper(localName = "realizeReservation", targetNamespace = "https://soap.agent.ftnbooking", className = "ftnbooking.agent.soap.RealizeReservation")
 	    @ResponseWrapper(localName = "realizeReservationResponse", targetNamespace = "https://soap.agent.ftnbooking", className = "ftnbooking.agent.soap.RealizeReservationResponse")
@@ -42,6 +45,7 @@ public interface LodgingService {
 	        @WebParam(name = "arg0", targetNamespace = "")
 	        Reservation arg0);
 	 
+	 @WebMethod
 	 @WebResult(targetNamespace = "")
 	    @RequestWrapper(localName = "synchronizeLodging", targetNamespace = "https://soap.agent.ftnbooking", className = "ftnbooking.agent.soap.SynchronizeLodging")
 	    @ResponseWrapper(localName = "synchronizeLodgingResponse", targetNamespace = "https://soap.agent.ftnbooking", className = "ftnbooking.agent.soap.SynchronizeLodgingResponse")
@@ -49,6 +53,7 @@ public interface LodgingService {
 	        @WebParam(name = "arg0", targetNamespace = "")
 	        ApplicationUser arg0); //verovatno ce se menjati
 	 
+	 @WebMethod
 	 @WebResult(targetNamespace = "")
 	    @RequestWrapper(localName = "synchronizeReservation", targetNamespace = "https://soap.agent.ftnbooking", className = "ftnbooking.agent.soap.SynchronizeReservation")
 	    @ResponseWrapper(localName = "synchronizeReservationResponse", targetNamespace = "https://soap.agent.ftnbooking", className = "ftnbooking.agent.soap.SynchronizeReservationResponse")
@@ -56,21 +61,41 @@ public interface LodgingService {
 	        @WebParam(name = "arg0", targetNamespace = "")
 	        ApplicationUser arg0); //verovatno ce se menjati
 	 
+	 @WebMethod
 	 @WebResult(targetNamespace = "")
 	    @RequestWrapper(localName = "synchronizeFeatureType", targetNamespace = "https://soap.agent.ftnbooking", className = "ftnbooking.agent.soap.SynchronizeFeatureType")
 	    @ResponseWrapper(localName = "synchronizeFeatureTypeResponse", targetNamespace = "https://soap.agent.ftnbooking", className = "ftnbooking.agent.soap.SynchronizeFeatureTypeResponse")
 	    public List<FeatureType> synchronizeFeatureType(
 	       );
 	 
+	 @WebMethod
 	 @WebResult(targetNamespace = "")
 	    @RequestWrapper(localName = "synchronizeLodgingType", targetNamespace = "https://soap.agent.ftnbooking", className = "ftnbooking.agent.soap.SynchronizeLodgingType")
 	    @ResponseWrapper(localName = "synchronizeLodgingTypeResponse", targetNamespace = "https://soap.agent.ftnbooking", className = "ftnbooking.agent.soap.SynchronizeLodgingTypeResponse")
 	    public List<LodgingType> synchronizeLodgingType(
 	       );
 	 
+	 @WebMethod
 	 @WebResult(targetNamespace = "")
 	    @RequestWrapper(localName = "synchronizeFoodServiceType", targetNamespace = "https://soap.agent.ftnbooking", className = "ftnbooking.agent.soap.SynchronizeFoodServiceType")
 	    @ResponseWrapper(localName = "synchronizeFoodServiceTypeResponse", targetNamespace = "https://soap.agent.ftnbooking", className = "ftnbooking.agent.soap.SynchronizeFoodServiceTypeResponse")
 	    public List<FoodServiceType> synchronizeFoodServiceType(
 	       );
+	 
+	 @WebMethod
+	 @WebResult(targetNamespace = "")
+	    @RequestWrapper(localName = "synchronizePrice", targetNamespace = "https://soap.agent.ftnbooking", className = "ftnbooking.agent.soap.SynchronizePrice")
+	    @ResponseWrapper(localName = "synchronizePriceResponse", targetNamespace = "https://soap.agent.ftnbooking", className = "ftnbooking.agent.soap.SynchronizePriceResponse")
+	    public List<Price> synchronizePrice(
+	        @WebParam(name = "arg0", targetNamespace = "")
+	        ApplicationUser arg0); //verovatno ce se menjati
+	 
+	 @WebMethod
+	    @WebResult(targetNamespace = "")
+	    @RequestWrapper(localName = "addPrice", targetNamespace = "https://soap.agent.ftnbooking", className = "ftnbooking.agent.soap.AddPrice")
+	    @ResponseWrapper(localName = "addPriceResponse", targetNamespace = "https://soap.agent.ftnbooking", className = "ftnbooking.agent.soap.AddPriceResponse")
+	    public Long addPrice(
+	        @WebParam(name = "arg0", targetNamespace = "")
+	        Price arg0);
+
 }
