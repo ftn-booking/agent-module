@@ -3,12 +3,11 @@ package ftnbooking.agent.soap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
-
-
+import com.sun.mail.iap.Response;
 
 @RestController
 @RequestMapping("/lodging")
@@ -19,9 +18,37 @@ public class LodgingController {
 	@Autowired
 	private ApplicationUserRepository applicationUserRepository;
 	@Autowired
-	private LodgingTypeRepository lodgingTypeRepository;
+	private LodgingTypeService lodgingTypeService;
 	@Autowired
-	private FeatureTypeRepository featureTypeRepository;
+	private FeatureTypeService featureTypeService;
+	@Autowired
+	private LodgingServiceLocal lsl;
+	
+	@GetMapping("/{id}")
+		public ResponseEntity<?> getMyLodgings(@PathVariable Long id){
+		List<Lodging> lodgings = lsl.findByAgentId(id);
+		return new ResponseEntity<>(lodgings, HttpStatus.OK);
+	}
+	
+	@PostMapping
+	public ResponseEntity<?> addLodging(Lodging l){
+		lodgingService.addLodging(l);
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
+	
+	@GetMapping("/getLodgingTypes")
+	public ResponseEntity<?> getLodgingTypes(){
+		List<LodgingType> lt = lodgingTypeService.findAll();
+		System.out.println(lt.size());
+		return new ResponseEntity<>(lt,HttpStatus.OK);
+	}
+	
+	@GetMapping("/getFeatureTypes")
+	public ResponseEntity<?> getFeatureTypes(){
+		List<FeatureType> ft = featureTypeService.findAll();
+		System.out.println(ft.size());
+		return new ResponseEntity<>(ft,HttpStatus.OK);
+	}
 	
 	@GetMapping("/addLodging")
 	public Long testLocation() {
