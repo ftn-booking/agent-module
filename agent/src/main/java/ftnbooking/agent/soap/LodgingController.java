@@ -3,6 +3,7 @@ package ftnbooking.agent.soap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+<<<<<<< Updated upstream
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -10,6 +11,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 
+=======
+import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+>>>>>>> Stashed changes
 @RestController
 @RequestMapping("/lodging")
 public class LodgingController {
@@ -17,14 +25,71 @@ public class LodgingController {
 	@Autowired
 	private LodgingService lodgingService;
 	@Autowired
+	private LodgingServiceLocal lodgingServiceLocal;
+	@Autowired
 	private ApplicationUserRepository applicationUserRepository;
 	@Autowired
 	private LodgingTypeRepository lodgingTypeRepository;
 	@Autowired
+<<<<<<< Updated upstream
 	private FeatureTypeRepository featureTypeRepository;
+=======
+	private FoodServiceTypeService foodServiceTypeService;
+	
+	@GetMapping("/agent/{id}")
+		public ResponseEntity<?> getMyLodgings(@PathVariable Long id){
+		List<Lodging> lodgings = lodgingServiceLocal.findByAgentId(id);
+		return new ResponseEntity<>(lodgings, HttpStatus.OK);
+	}
+
+	@GetMapping("/{id}")
+	public ResponseEntity<?> getLodging(@PathVariable Long id){
+	Lodging lodging = lodgingServiceLocal.findOne(id);
+	return new ResponseEntity<>(lodging, HttpStatus.OK);
+}
+	
+	@PostMapping("/add")
+	public ResponseEntity<?> addLodging(@RequestBody Lodging l){
+//		System.out.println(l.toString());	
+		return new ResponseEntity<>(lodgingServiceLocal.add(l), HttpStatus.OK);
+	}
+	
+	@GetMapping("/food/{id}")
+	public ResponseEntity<?> getLodgingMeal(@PathVariable Long id){
+		return new ResponseEntity<>(foodServiceTypeService.findOne(id),HttpStatus.OK);
+	}
+	
+	@GetMapping("/type/{id}")
+	public ResponseEntity<?> getLodgingType(@PathVariable Long id){
+		return new ResponseEntity<>(lodgingTypeService.findOne(id),HttpStatus.OK);
+	}
+	
+	
+	@GetMapping("/feature/{id}")
+	public ResponseEntity<?> getLodgingService(@PathVariable Long id){
+		return new ResponseEntity<>(featureTypeService.findOne(id),HttpStatus.OK);
+	}
+	
+	@GetMapping("/getLodgingTypes")
+	public ResponseEntity<?> getLodgingTypes(){
+		return new ResponseEntity<>(lodgingTypeService.findAll(), HttpStatus.OK);
+	}
+	
+	@GetMapping("/getFeatureTypes")
+	public ResponseEntity<?> getFeatureTypes(){
+		return new ResponseEntity<>(featureTypeService.findAll(), HttpStatus.OK);
+	}
+	
+	@GetMapping("/getFoodServiceTypes")
+	public ResponseEntity<?> getFoodServiceTypes(){
+		List<FoodServiceType> fst = foodServiceTypeService.findAll();
+		System.out.println(fst.size());
+		return new ResponseEntity<>(fst, HttpStatus.OK);
+	}
+>>>>>>> Stashed changes
 	
 	@GetMapping("/addLodging")
-	public Long testLocation() {
+	public Long testLocation(Lodging l) {
 		System.out.println("AAAA");
 		/*LodgingType lodgingType1 = new LodgingType("HOTEL");
 		lodgingTypeRepository.save(lodgingType1);
@@ -53,8 +118,7 @@ public class LodgingController {
 		user3.setUserType(ApplicationUserType.AGENT);
 		applicationUserRepository.save(user3);
 		lodging.setAgent(user3);
-		Long id = lodgingService.addLodging(lodging);
 		
-		return id;
+		return 0L;
 	}
 }

@@ -27,11 +27,12 @@ import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    
+
 })
 @XmlRootElement(name = "Lodging")
 @Entity
 public class Lodging {
+
 	@XmlElement(required = true)
 	@Id
 	@GeneratedValue
@@ -48,7 +49,7 @@ public class Lodging {
 
 	@XmlElement(required = true)
 	private String address;
-	
+
 	@XmlElement(required = true)
 	@NotBlank
 	private String description;
@@ -70,18 +71,26 @@ public class Lodging {
 	@XmlElement(required = true)
 	@ManyToMany(cascade = CascadeType.REMOVE)
 	private List<FeatureType> featureType;
-	
+
 	@XmlElement(required = true)
 	@ManyToOne(fetch = FetchType.EAGER)
 	private LodgingType lodgingType;
 
 	@XmlElement(required = true)
+<<<<<<< Updated upstream
+=======
+	@ManyToOne(fetch = FetchType.EAGER)
+	private FoodServiceType foodServiceType;
+
+	@XmlElement(required = true)
+>>>>>>> Stashed changes
 	@ElementCollection
 	private List<String> imagePaths = new ArrayList<String>();
-	
+
 	@XmlElement(required = true)
-	@ManyToOne(fetch = FetchType.EAGER,cascade=CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private ApplicationUser agent;
+<<<<<<< Updated upstream
 	
 	public Lodging() {}
 
@@ -93,6 +102,14 @@ public class Lodging {
 			int numberOfBeds,
 			List<FeatureType> featureType,
 			ApplicationUser agent) {
+=======
+
+	public Lodging() {
+	}
+
+	public Lodging(String name, String address, String description, int category, LodgingType lodgingType,
+			FoodServiceType foodServiceType, int numberOfBeds, List<FeatureType> featureType, ApplicationUser agent) {
+>>>>>>> Stashed changes
 		this.name = name;
 		this.address = address;
 		this.description = description;
@@ -102,7 +119,6 @@ public class Lodging {
 		this.featureType = featureType;
 		this.agent = agent;
 	}
-
 
 	public Long getId() {
 		return id;
@@ -183,7 +199,7 @@ public class Lodging {
 	public void setImagePaths(List<String> imagePaths) {
 		this.imagePaths = imagePaths;
 	}
-	
+
 	public void addImagePath(String imagePath) {
 		this.imagePaths.add(imagePath);
 	}
@@ -204,7 +220,17 @@ public class Lodging {
 		this.lodgingType = lodgingType;
 	}
 
+<<<<<<< Updated upstream
 	
 	
+=======
+	public FoodServiceType getFoodServiceType() {
+		return foodServiceType;
+	}
+
+	public void setFoodServiceType(FoodServiceType foodServiceType) {
+		this.foodServiceType = foodServiceType;
+	}
+>>>>>>> Stashed changes
 
 }
