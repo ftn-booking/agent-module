@@ -3,21 +3,14 @@ package ftnbooking.agent.soap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-<<<<<<< Updated upstream
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-
-
-
-=======
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
->>>>>>> Stashed changes
 @RestController
 @RequestMapping("/lodging")
 public class LodgingController {
@@ -29,11 +22,10 @@ public class LodgingController {
 	@Autowired
 	private ApplicationUserRepository applicationUserRepository;
 	@Autowired
-	private LodgingTypeRepository lodgingTypeRepository;
+	private LodgingTypeService lodgingTypeService;
 	@Autowired
-<<<<<<< Updated upstream
-	private FeatureTypeRepository featureTypeRepository;
-=======
+	private FeatureTypeService featureTypeService;
+	@Autowired
 	private FoodServiceTypeService foodServiceTypeService;
 	
 	@GetMapping("/agent/{id}")
@@ -86,7 +78,6 @@ public class LodgingController {
 		System.out.println(fst.size());
 		return new ResponseEntity<>(fst, HttpStatus.OK);
 	}
->>>>>>> Stashed changes
 	
 	@GetMapping("/addLodging")
 	public Long testLocation(Lodging l) {
@@ -109,6 +100,7 @@ public class LodgingController {
 				"Test lodging 1",
 				4,
 				null,//lodgingType1,
+				null, //foodServiceType1
 				2,
 				null,//features,
 				user3);

@@ -15,7 +15,7 @@ public class LodgingServiceImpl implements LodgingServiceLocal{
 	public List<Lodging> findByAgentId(Long id) {
 		return lodgingRepository.findByAgentId(id);
 	}
-
+	
 	@Override
 	public Lodging add(Lodging l) {
 		return lodgingRepository.save(l);

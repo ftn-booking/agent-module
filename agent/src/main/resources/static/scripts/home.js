@@ -22,7 +22,7 @@ $(document).ready(function(){
 			console.log('shouldn\'t show up except if back-end is down');
 			
 		}
-		
+			
 	});
 	
 });
@@ -35,6 +35,7 @@ function home(){
 			
 			$.get({
 				url:"/lodging/agent/" + t1,
+
 				success: function(data2){
 					for(var i = 0; i < data2.length; i++){
 						$("#LodgingTable").append('<tr>'
@@ -67,6 +68,7 @@ function addL(){
 		success: function(data){
 			for(var i = 0; i < data.length; i++)
 				lodgingTypes+='<option value="'+data[i].id+'">'+data[i].name+'</option>'
+
 			$("#lodgingType").html(lodgingTypes);	
 		}
 	});

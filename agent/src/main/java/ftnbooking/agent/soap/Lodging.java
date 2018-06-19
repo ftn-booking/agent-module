@@ -77,44 +77,29 @@ public class Lodging {
 	private LodgingType lodgingType;
 
 	@XmlElement(required = true)
-<<<<<<< Updated upstream
-=======
+
 	@ManyToOne(fetch = FetchType.EAGER)
 	private FoodServiceType foodServiceType;
 
 	@XmlElement(required = true)
->>>>>>> Stashed changes
 	@ElementCollection
 	private List<String> imagePaths = new ArrayList<String>();
 
 	@XmlElement(required = true)
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private ApplicationUser agent;
-<<<<<<< Updated upstream
 	
 	public Lodging() {}
 
-	public Lodging(String name,
-			String address,
-			String description,
-			int category,
-			LodgingType lodgingType,
-			int numberOfBeds,
-			List<FeatureType> featureType,
-			ApplicationUser agent) {
-=======
-
-	public Lodging() {
-	}
 
 	public Lodging(String name, String address, String description, int category, LodgingType lodgingType,
 			FoodServiceType foodServiceType, int numberOfBeds, List<FeatureType> featureType, ApplicationUser agent) {
->>>>>>> Stashed changes
 		this.name = name;
 		this.address = address;
 		this.description = description;
 		this.category = category;
 		this.lodgingType = lodgingType;
+		this.foodServiceType = foodServiceType;
 		this.numberOfBeds = numberOfBeds;
 		this.featureType = featureType;
 		this.agent = agent;
@@ -220,10 +205,6 @@ public class Lodging {
 		this.lodgingType = lodgingType;
 	}
 
-<<<<<<< Updated upstream
-	
-	
-=======
 	public FoodServiceType getFoodServiceType() {
 		return foodServiceType;
 	}
@@ -231,6 +212,5 @@ public class Lodging {
 	public void setFoodServiceType(FoodServiceType foodServiceType) {
 		this.foodServiceType = foodServiceType;
 	}
->>>>>>> Stashed changes
 
 }
