@@ -67,4 +67,10 @@ public interface LodgingService {
 	    @ResponseWrapper(localName = "synchronizeLodgingTypeResponse", targetNamespace = "https://soap.agent.ftnbooking", className = "ftnbooking.agent.soap.SynchronizeLodgingTypeResponse")
 	    public List<LodgingType> synchronizeLodgingType(
 	       );
+	 
+	 @WebResult(targetNamespace = "")
+	    @RequestWrapper(localName = "synchronizeFoodServiceType", targetNamespace = "https://soap.agent.ftnbooking", className = "ftnbooking.agent.soap.SynchronizeFoodServiceType")
+	    @ResponseWrapper(localName = "synchronizeFoodServiceTypeResponse", targetNamespace = "https://soap.agent.ftnbooking", className = "ftnbooking.agent.soap.SynchronizeFoodServiceTypeResponse")
+	    public List<FoodServiceType> synchronizeFoodServiceType(
+	       );
 }
