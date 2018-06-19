@@ -71,6 +71,7 @@ public class LodgingController {
 				"Test lodging 1",
 				4,
 				null,//lodgingType1,
+				null, //foodServiceType1
 				2,
 				null,//features,
 				user3);
