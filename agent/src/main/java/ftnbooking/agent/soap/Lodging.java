@@ -1,7 +1,9 @@
 package ftnbooking.agent.soap;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.ElementCollection;
@@ -11,6 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Version;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -61,28 +64,30 @@ public class Lodging {
 	@XmlElement(required = true)
 	@Max(5)
 	@Min(1)
-	private Integer rating;
+	private Double rating;
 
+	@XmlElement(required = true)
+	private int numberOfRatings = 0;
+	
 	@XmlElement(required = true)
 	@Min(1)
 	private int numberOfBeds;
 
 	@XmlElement(required = true)
-	@ManyToMany(cascade = CascadeType.REMOVE)
-	private List<FeatureType> featureType;
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+	private Set<FeatureType> featureType;
 
 	@XmlElement(required = true)
 	@ManyToOne(fetch = FetchType.EAGER)
 	private LodgingType lodgingType;
 
 	@XmlElement(required = true)
-
 	@ManyToOne(fetch = FetchType.EAGER)
 	private FoodServiceType foodServiceType;
 
 	@XmlElement(required = true)
-	@ElementCollection
-	private List<String> imagePaths = new ArrayList<String>();
+	@ElementCollection(fetch = FetchType.EAGER)
+	private Set<String> imagePaths = new HashSet<String>();
 
 	@XmlElement(required = true)
 	@ManyToOne(fetch = FetchType.EAGER)
@@ -92,7 +97,7 @@ public class Lodging {
 
 
 	public Lodging(String name, String address, String description, int category, LodgingType lodgingType,
-			FoodServiceType foodServiceType, int numberOfBeds, List<FeatureType> featureType, ApplicationUser agent) {
+			FoodServiceType foodServiceType, int numberOfBeds, Set<FeatureType> featureType, ApplicationUser agent) {
 		this.name = name;
 		this.address = address;
 		this.description = description;
@@ -144,11 +149,11 @@ public class Lodging {
 		this.category = category;
 	}
 
-	public Integer getRating() {
+	public Double getRating() {
 		return rating;
 	}
 
-	public void setRating(Integer rating) {
+	public void setRating(Double rating) {
 		this.rating = rating;
 	}
 
@@ -176,11 +181,11 @@ public class Lodging {
 		this.address = address;
 	}
 
-	public List<String> getImagePaths() {
+	public Set<String> getImagePaths() {
 		return imagePaths;
 	}
 
-	public void setImagePaths(List<String> imagePaths) {
+	public void setImagePaths(Set<String> imagePaths) {
 		this.imagePaths = imagePaths;
 	}
 
@@ -188,11 +193,11 @@ public class Lodging {
 		this.imagePaths.add(imagePath);
 	}
 
-	public List<FeatureType> getFeatureType() {
+	public Set<FeatureType> getFeatureType() {
 		return featureType;
 	}
 
-	public void setFeatureType(List<FeatureType> featureType) {
+	public void setFeatureType(Set<FeatureType> featureType) {
 		this.featureType = featureType;
 	}
 

@@ -1,7 +1,9 @@
 package ftnbooking.agent.app;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.ElementCollection;
@@ -10,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Version;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -49,8 +52,11 @@ public class LodgingDTO {
 	@XmlElement(required = true)
 	@Max(5)
 	@Min(1)
-	private Integer rating;
+	private Double rating;
 
+	@XmlElement(required = true)
+	private int numberOfRatings = 0;
+	
 	@XmlElement(required = true)
 	@Min(1)
 	private int numberOfBeds;
@@ -64,13 +70,12 @@ public class LodgingDTO {
 	private Long lodgingType;
 
 	@XmlElement(required = true)
-
 	@ManyToOne(fetch = FetchType.EAGER)
 	private Long foodServiceType;
 
 	@XmlElement(required = true)
-	@ElementCollection
-	private List<String> imagePaths = new ArrayList<String>();
+	@ElementCollection(fetch = FetchType.EAGER)
+	private Set<String> imagePaths = new HashSet<String>();
 
 	@XmlElement(required = true)
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
@@ -112,11 +117,11 @@ public class LodgingDTO {
 		this.category = category;
 	}
 
-	public Integer getRating() {
+	public Double getRating() {
 		return rating;
 	}
 
-	public void setRating(Integer rating) {
+	public void setRating(Double rating) {
 		this.rating = rating;
 	}
 
@@ -152,11 +157,11 @@ public class LodgingDTO {
 		this.foodServiceType = foodServiceType;
 	}
 
-	public List<String> getImagePaths() {
+	public Set<String> getImagePaths() {
 		return imagePaths;
 	}
 
-	public void setImagePaths(List<String> imagePaths) {
+	public void setImagePaths(Set<String> imagePaths) {
 		this.imagePaths = imagePaths;
 	}
 
