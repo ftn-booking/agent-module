@@ -61,6 +61,11 @@ public class LodgingType {
 	public void setActive(boolean active) {
 		this.active = active;
 	}
+
+	@Override
+	public String toString() {
+		return "LodgingType [id=" + id + ", name=" + name + ", active=" + active + "]";
+	}
 	
 	
 

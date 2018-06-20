@@ -115,13 +115,13 @@ $(document).on("submit","#addForm",function(e){
 	$('input:checked').each(function() {
 	    selected.push($(this).attr('name'));
 	});
-/*
+
 	console.log(lodgingType);
 	console.log(lodgingMeal); //id from the db
 	console.log(selected);		//list of ^
-*/	
+
 	//first two work, third doesn't
-/*	var lType = "";
+	/*var lType = "";
 	$.get({
 		url: "/lodging/type/"+lodgingType,
 		success: function(data4){
@@ -135,7 +135,7 @@ $(document).on("submit","#addForm",function(e){
 		success: function(data4){
 			fType = data4;
 		}
-	});
+	});/*
 	
 	var sType = [];
 	for(var i = 0; i < selected.length; i++){
@@ -155,10 +155,10 @@ $(document).on("submit","#addForm",function(e){
 		"description": description,
 		"numberOfBeds": numberOfBeds,
 		"category": ff,
-		"rating": ff /*,
-		//"lodgingType": lType,
-		//"foodServiceType": fType,
-		//"featureType": sType,
+		"rating": ff ,
+		"lodgingType": lodgingType,
+		"foodServiceType": lodgingMeal,
+		"featureType": selected/*,
 		//"agent": .... */
 	});
 	$.post({

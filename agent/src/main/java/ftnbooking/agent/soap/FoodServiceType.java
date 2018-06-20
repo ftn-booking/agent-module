@@ -61,5 +61,12 @@ public class FoodServiceType {
 	public void setActive(boolean active) {
 		this.active = active;
 	}
+
+	@Override
+	public String toString() {
+		return "FoodServiceType [id=" + id + ", name=" + name + ", active=" + active + "]";
+	}
+	
+	
 	
 }

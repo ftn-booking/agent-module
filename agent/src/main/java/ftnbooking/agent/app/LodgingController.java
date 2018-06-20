@@ -1,5 +1,6 @@
 package ftnbooking.agent.app;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,8 +9,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import ftnbooking.agent.soap.ApplicationUserRepository;
+import ftnbooking.agent.soap.FeatureType;
 import ftnbooking.agent.soap.FeatureTypeService;
 import ftnbooking.agent.soap.FoodServiceType;
+import ftnbooking.agent.soap.FoodServiceTypeRepository;
 import ftnbooking.agent.soap.FoodServiceTypeService;
 import ftnbooking.agent.soap.Lodging;
 import ftnbooking.agent.soap.LodgingService;
@@ -45,13 +48,40 @@ public class LodgingController {
 
 	@GetMapping("/{id}")
 	public ResponseEntity<?> getLodging(@PathVariable Long id){
-	Lodging lodging = lodgingServiceLocal.findOne(id);
-	return new ResponseEntity<>(lodging, HttpStatus.OK);
-}
+		Lodging lodging = lodgingServiceLocal.findOne(id);
+		return new ResponseEntity<>(lodging, HttpStatus.OK);
+	}
+	
+	public List<FeatureType> features(List<Long> feature) {
+		List<FeatureType> list = new ArrayList<>();
+		if(feature == null) {
+			return new ArrayList<>();
+		}
+		for(int i = 0; i<feature.size(); i++) {
+			list.add(featureTypeService.findOne(feature.get(i)));
+		}
+		return list;
+	}
+	
+	public Lodging convert(LodgingDTO l1) {
+		Lodging l = new Lodging();
+		l.setAddress(l1.getAddress());
+		l.setAgent(l1.getAgent());
+		l.setCategory(l1.getCategory());
+		l.setDescription(l1.getDescription());
+		l.setFoodServiceType(foodServiceTypeService.findOne(l1.getFoodServiceType()));
+		l.setLodgingType(lodgingTypeService.findOne(l1.getLodgingType()));
+		l.setImagePaths(l1.getImagePaths());
+		l.setName(l1.getName());
+		l.setNumberOfBeds(l1.getNumberOfBeds());
+		l.setFeatureType(features(l1.getFeatureType()));
+		return l;
+	}
 	
 	@PostMapping("/add")
-	public ResponseEntity<?> addLodging(@RequestBody Lodging l){
-		System.out.println(l.toString());	
+	public ResponseEntity<?> addLodging(@RequestBody LodgingDTO l1){
+		System.out.println(l1.toString());
+		Lodging l = convert(l1);
 		return new ResponseEntity<>(lodgingServiceLocal.add(l), HttpStatus.OK);
 	}
 	

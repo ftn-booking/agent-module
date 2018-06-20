@@ -213,4 +213,15 @@ public class Lodging {
 		this.foodServiceType = foodServiceType;
 	}
 
+
+	@Override
+	public String toString() {
+		return "Lodging [id=" + id + ", version=" + version + ", name=" + name + ", address=" + address
+				+ ", description=" + description + ", category=" + category + ", rating=" + rating + ", numberOfBeds="
+				+ numberOfBeds + ", featureType=" + featureType + ", lodgingType=" + lodgingType + ", foodServiceType="
+				+ foodServiceType + ", imagePaths=" + imagePaths + ", agent=" + agent + "]";
+	}
+	
+	
+
 }
