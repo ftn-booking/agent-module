@@ -1,9 +1,12 @@
-package ftnbooking.agent.soap;
+package ftnbooking.agent.app;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import ftnbooking.agent.soap.Lodging;
+import ftnbooking.agent.soap.LodgingRepository;
 
 @Service
 public class LodgingServiceImpl implements LodgingServiceLocal{

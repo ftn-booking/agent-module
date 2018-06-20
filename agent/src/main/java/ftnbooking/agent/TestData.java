@@ -39,9 +39,11 @@ public class TestData {
 		FeatureType featureType1 = new FeatureType("hasTV");
 		FeatureType featureType2 = new FeatureType("hasWiFi");
 		FeatureType featureType3 = new FeatureType("hasParking");
+		FeatureType featureType4 = new FeatureType("hasPool");
 		featureTypeService.add(featureType1);
 		featureTypeService.add(featureType2);
 		featureTypeService.add(featureType3);
+		featureTypeService.add(featureType4);
 		
 		FoodServiceType f1 = new FoodServiceType("Breakfast");
 		FoodServiceType f2 = new FoodServiceType("Half Board");

@@ -1,6 +1,8 @@
-package ftnbooking.agent.soap;
+package ftnbooking.agent.app;
 
 import java.util.List;
+
+import ftnbooking.agent.soap.Lodging;
 
 public interface LodgingServiceLocal {
 
