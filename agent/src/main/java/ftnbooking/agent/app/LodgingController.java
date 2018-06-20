@@ -1,7 +1,9 @@
 package ftnbooking.agent.app;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -55,10 +57,10 @@ public class LodgingController {
 		return new ResponseEntity<>(lodging, HttpStatus.OK);
 	}
 	
-	public List<FeatureType> features(List<Long> feature) {
-		List<FeatureType> list = new ArrayList<>();
+	public Set<FeatureType> features(List<Long> feature) {
+		Set<FeatureType> list = new HashSet<>();
 		if(feature == null) {
-			return new ArrayList<>();
+			return new HashSet<>();
 		}
 		for(int i = 0; i<feature.size(); i++) {
 			list.add(featureTypeService.findOne(feature.get(i)));

@@ -60,4 +60,11 @@ public class TestController {
 		List<ApplicationUser> list = lodgingService.synchronizeApplicationUser();
 		return list;
 	}
+	
+	@GetMapping("/lodgings")
+	public List<Lodging> testLodgings() {
+		ApplicationUser arg0 = applicationUserRepository.findByEmail("han@me");
+		List<Lodging> list = lodgingService.synchronizeLodging(arg0);
+		return list;
+	}
 }

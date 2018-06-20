@@ -56,6 +56,11 @@ public class ApplicationUser {
 	@JsonIgnore
 	private String resetToken = UUID.randomUUID().toString();
 	
+	@XmlElement(required = true)
+	private boolean banned = false;
+	@XmlElement(required = true)
+	private boolean active = true;
+	
 	public ApplicationUser() {
 		
 	}
@@ -135,6 +140,46 @@ public class ApplicationUser {
 		return "ApplicationUser [id=" + id + ", version=" + version + ", email=" + email + ", password=" + password
 				+ ", name=" + name + ", lastName=" + lastName + ", city=" + city + ", phoneNumber=" + phoneNumber
 				+ ", userType=" + userType + ", resetToken=" + resetToken + "]";
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Long getVersion() {
+		return version;
+	}
+
+	public void setVersion(Long version) {
+		this.version = version;
+	}
+
+	public String getResetToken() {
+		return resetToken;
+	}
+
+	public void setResetToken(String resetToken) {
+		this.resetToken = resetToken;
+	}
+
+	public boolean isBanned() {
+		return banned;
+	}
+
+	public void setBanned(boolean banned) {
+		this.banned = banned;
+	}
+
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
 	}
 	
 	

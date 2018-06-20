@@ -105,5 +105,12 @@ public interface LodgingService {
 	    public List<ApplicationUser> synchronizeApplicationUser(
 	       );
 	 
+	 @WebMethod
+	 @WebResult(targetNamespace = "")
+	    @RequestWrapper(localName = "synchronizeMessage", targetNamespace = "https://soap.agent.ftnbooking", className = "ftnbooking.agent.soap.SynchronizeMessage")
+	    @ResponseWrapper(localName = "synchronizeMessageResponse", targetNamespace = "https://soap.agent.ftnbooking", className = "ftnbooking.agent.soap.SynchronizeMessageResponse")
+	    public List<Message> synchronizeMessage(
+	        @WebParam(name = "arg0", targetNamespace = "")
+	        ApplicationUser arg0);
 
 }

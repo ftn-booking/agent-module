@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Version;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -49,8 +50,11 @@ public class LodgingDTO {
 	@XmlElement(required = true)
 	@Max(5)
 	@Min(1)
-	private Integer rating;
+	private Double rating;
 
+	@XmlElement(required = true)
+	private int numberOfRatings = 0;
+	
 	@XmlElement(required = true)
 	@Min(1)
 	private int numberOfBeds;
@@ -64,12 +68,11 @@ public class LodgingDTO {
 	private Long lodgingType;
 
 	@XmlElement(required = true)
-
 	@ManyToOne(fetch = FetchType.EAGER)
 	private Long foodServiceType;
 
 	@XmlElement(required = true)
-	@ElementCollection
+	@ElementCollection(fetch = FetchType.EAGER)
 	private List<String> imagePaths = new ArrayList<String>();
 
 	@XmlElement(required = true)
@@ -112,11 +115,11 @@ public class LodgingDTO {
 		this.category = category;
 	}
 
-	public Integer getRating() {
+	public Double getRating() {
 		return rating;
 	}
 
-	public void setRating(Integer rating) {
+	public void setRating(Double rating) {
 		this.rating = rating;
 	}
 
