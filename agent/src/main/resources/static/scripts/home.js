@@ -135,13 +135,14 @@ $(document).on("submit","#addForm",function(e){
 	});
 
 	var ff = 1; //temporary 
+	var rat = null;
 	var json = JSON.stringify({
 		"name": name,
 		"address": addr,
 		"description": description,
 		"numberOfBeds": numberOfBeds,
 		"category": ff,
-		"rating": ff ,
+		"rating": rat ,
 		"lodgingType": lodgingType,
 		"foodServiceType": lodgingMeal,
 		"featureType": selected,

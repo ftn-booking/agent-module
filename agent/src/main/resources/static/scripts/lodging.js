@@ -102,9 +102,7 @@ $(document).on('click',"#addData", function(e){
 		}),
 		success: function(dataP){
 			$("#addModal").modal('toggle');
-			$("#timeFrame tbody tr").each(function(){
-				this.parentNode.removeChild(this);
-			})
+			$("#timeFrame").find("tr:gt(0)").remove();
 			getLodging();
 			console.log(dataP);
 		}
