@@ -10,16 +10,14 @@ import org.springframework.web.bind.annotation.*;
 
 import ftnbooking.agent.soap.ApplicationUser;
 import ftnbooking.agent.soap.ApplicationUserRepository;
+import ftnbooking.agent.soap.ApplicationUserType;
 import ftnbooking.agent.soap.FeatureType;
 import ftnbooking.agent.soap.FeatureTypeService;
 import ftnbooking.agent.soap.FoodServiceType;
-import ftnbooking.agent.soap.FoodServiceTypeRepository;
 import ftnbooking.agent.soap.FoodServiceTypeService;
 import ftnbooking.agent.soap.Lodging;
 import ftnbooking.agent.soap.LodgingService;
 import ftnbooking.agent.soap.LodgingTypeService;
-import ftnbooking.agent.soap.Price;
-import ftnbooking.agent.soap.Reservation;
 
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
@@ -42,6 +40,9 @@ public class LodgingController {
 	private FeatureTypeService featureTypeService;
 	@Autowired
 	private FoodServiceTypeService foodServiceTypeService;
+	@Autowired
+	private AgentServiceLocal agentService;
+	
 	@GetMapping("/agent/{id}")
 		public ResponseEntity<?> getMyLodgings(@PathVariable Long id){
 		List<Lodging> lodgings = lodgingServiceLocal.findByAgentId(id);
@@ -68,7 +69,7 @@ public class LodgingController {
 	public Lodging convert(LodgingDTO l1) {
 		Lodging l = new Lodging();
 		l.setAddress(l1.getAddress());
-		l.setAgent(l1.getAgent());
+		l.setAgent(agentService.findByEmail(l1.getAgent()));
 		l.setCategory(l1.getCategory());
 		l.setDescription(l1.getDescription());
 		l.setFoodServiceType(foodServiceTypeService.findOne(l1.getFoodServiceType()));
@@ -90,14 +91,10 @@ public class LodgingController {
 	
 	@PostMapping("/add")
 	public ResponseEntity<?> addLodging(@RequestBody LodgingDTO l1){
-		System.out.println(l1.toString());
-		Lodging l = convert(l1);
-		System.out.println(applicationUserRepository.findByEmail("han@me"));
-		System.out.println("AA");
-		System.out.println(applicationUserRepository.findAll());
-		l.setAgent(applicationUserRepository.findByEmail("han@me"));
+		System.out.println(l1);
+		Lodging l = lodgingServiceLocal.add(convert(l1));
 		System.out.println(l);
-		return new ResponseEntity<>(lodgingServiceLocal.add(l), HttpStatus.OK);
+		return new ResponseEntity<>(l, HttpStatus.OK);
 	}
 	
 	@GetMapping("/food/{id}")
@@ -132,6 +129,5 @@ public class LodgingController {
 		System.out.println(fst.size());
 		return new ResponseEntity<>(fst, HttpStatus.OK);
 	}
-	
-	
+		
 }

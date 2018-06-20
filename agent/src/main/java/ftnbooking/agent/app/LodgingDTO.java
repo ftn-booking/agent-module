@@ -74,146 +74,100 @@ public class LodgingDTO {
 
 	@XmlElement(required = true)
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	private ApplicationUser agent;
-	
+	private String agent;
+
 	public LodgingDTO() {
-		
+
 	}
-	
-	
-	
+
 	public String getName() {
 		return name;
 	}
-
-
 
 	public void setName(String name) {
 		this.name = name;
 	}
 
-
-
 	public String getAddress() {
 		return address;
 	}
-
-
 
 	public void setAddress(String address) {
 		this.address = address;
 	}
 
-
-
 	public String getDescription() {
 		return description;
 	}
-
-
 
 	public void setDescription(String description) {
 		this.description = description;
 	}
 
-
-
 	public int getCategory() {
 		return category;
 	}
-
-
 
 	public void setCategory(int category) {
 		this.category = category;
 	}
 
-
-
 	public Integer getRating() {
 		return rating;
 	}
-
-
 
 	public void setRating(Integer rating) {
 		this.rating = rating;
 	}
 
-
-
 	public int getNumberOfBeds() {
 		return numberOfBeds;
 	}
-
-
 
 	public void setNumberOfBeds(int numberOfBeds) {
 		this.numberOfBeds = numberOfBeds;
 	}
 
-
-
 	public List<Long> getFeatureType() {
 		return featureType;
 	}
-
-
 
 	public void setFeatureType(List<Long> featureType) {
 		this.featureType = featureType;
 	}
 
-
-
 	public Long getLodgingType() {
 		return lodgingType;
 	}
-
-
 
 	public void setLodgingType(Long lodgingType) {
 		this.lodgingType = lodgingType;
 	}
 
-
-
 	public Long getFoodServiceType() {
 		return foodServiceType;
 	}
-
-
 
 	public void setFoodServiceType(Long foodServiceType) {
 		this.foodServiceType = foodServiceType;
 	}
 
-
-
 	public List<String> getImagePaths() {
 		return imagePaths;
 	}
-
-
 
 	public void setImagePaths(List<String> imagePaths) {
 		this.imagePaths = imagePaths;
 	}
 
-
-
-	public ApplicationUser getAgent() {
+	public String getAgent() {
 		return agent;
 	}
 
-
-
-	public void setAgent(ApplicationUser agent) {
+	public void setAgent(String agent) {
 		this.agent = agent;
 	}
 
-	
-	
 	@Override
 	public String toString() {
 		return "LodgingDTO [name=" + name + ", address=" + address + ", description=" + description + ", category="
@@ -221,7 +175,5 @@ public class LodgingDTO {
 				+ ", lodgingType=" + lodgingType + ", foodServiceType=" + foodServiceType + ", imagePaths=" + imagePaths
 				+ ", agent=" + agent + "]";
 	}
-
-
 
 }
