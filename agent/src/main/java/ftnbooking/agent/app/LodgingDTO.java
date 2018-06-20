@@ -1,7 +1,9 @@
 package ftnbooking.agent.app;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.ElementCollection;
@@ -73,7 +75,7 @@ public class LodgingDTO {
 
 	@XmlElement(required = true)
 	@ElementCollection(fetch = FetchType.EAGER)
-	private List<String> imagePaths = new ArrayList<String>();
+	private Set<String> imagePaths = new HashSet<String>();
 
 	@XmlElement(required = true)
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
@@ -155,11 +157,11 @@ public class LodgingDTO {
 		this.foodServiceType = foodServiceType;
 	}
 
-	public List<String> getImagePaths() {
+	public Set<String> getImagePaths() {
 		return imagePaths;
 	}
 
-	public void setImagePaths(List<String> imagePaths) {
+	public void setImagePaths(Set<String> imagePaths) {
 		this.imagePaths = imagePaths;
 	}
 
