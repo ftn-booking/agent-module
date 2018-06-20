@@ -6,19 +6,63 @@
     <meta charset="UTF-8">
 	<script src="scripts/jquery-3.3.1.min.js"></script>
 	<script src="scripts/jscookie.js"></script>
+	<script src="scripts/bootstrap.min.js"></script>
 	<script src="scripts/lodging.js"></script>
 
+    <link href="css/bootstrap.min.css" rel="stylesheet"/>
     <link href="css/lodging.css" rel="stylesheet"/>
 
     
 </head>
 
 <body>
+<div>
+	
+	<div style="float: right; width:99%">
+		<div id="lodgingData" >
+	
+		</div>
 
-<div id="lodgingData">
-
+		<table id="timeFrame"><br>
+			<tr id="mid"><th>Start Date</th><th>End Date</th><th>Price</th></tr>
+		</table>
+	</div>
+	<div class="formContainer">
+		<div class="modal fade" id="addModal" tabindex="-1" role="dialog">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="addModalLabel">Add price for time frame</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<form id="addForm">
+						<div class="modal-body">
+							<input type="hidden" name="id" id="id"/>
+							<table>
+							<p>
+								<tr><td><label for="modalPrice">Price</label> </td><td> <input type="number" name="code"
+																		  id="priceP" /> </td></tr>
+							</p>
+							<p>
+								<tr><td><label for="modalDateFrom">From</label> </td><td> <input type="date" id="dateFromP"/> </td></tr>
+							</p>
+							<p>
+								<tr><td><label for="modalDateFrom">To</label></td><td> <input type="date" id="dateToP"/></td></tr>
+							</p>
+							</table>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+							<button type="button" class="btn btn-primary" id="addData">Confirm</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
-
 </body>
 
 </html>

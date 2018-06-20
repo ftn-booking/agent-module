@@ -4,12 +4,16 @@
 
 .column {
 	float: left;
-	width: 7%;
-	padding: 5px;
+	width: 12%;
+	padding: 10px;
 }
 
 .row::after {
 	content: "";
 	clear: both;
 	display: table;
+}
+
+table, th, td {
+	border: 1px solid black;
 }

@@ -1,0 +1,16 @@
+/*table, th, td {
+	border: 1px solid black;
+}*/
+
+table tr.highlighted{
+	background: #89C4F4;	
+}
+
+table tr:not(.header){
+	cursor:pointer;
+}
+
+table tr.header{
+	background: #67809F;
+	font-size: 125%;	
+}

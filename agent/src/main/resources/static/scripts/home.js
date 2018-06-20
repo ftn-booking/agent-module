@@ -53,7 +53,7 @@ function home(){
 function addL(){
 	$("#middle").empty();
 	$("#middle").html('<form id="addForm"></form>');
-	$("#addForm").html('<table><tr><div class="dropzone">'
+	$("#addForm").html('<table id="formTable"><tr><div class="dropzone">'
 	        +'<div class="info"></div>'
 	        +'</div></tr><br>'
 	        +'<script type="text/javascript" src="scripts/imgur.js"></script>'
@@ -83,8 +83,8 @@ function addL(){
 		url:"/lodging/getFeatureTypes",
 		success: function(data){
 			for(var i = 0; i < data.length; i++)
-				featureTypes+='<tr><td><label>'+data[i].name+': </label></td><td><input type="checkbox" name="'+data[i].id+'" value="'+data[i].name+'"></rd></tr>'
-			$("#addForm").append(featureTypes);
+				featureTypes+='<tr><td><label>'+data[i].name+': </label></td><td><input type="checkbox" name="'+data[i].id+'" value="'+data[i].name+'"></td></tr>'
+			$("#formTable").append(featureTypes);
 			$("#addForm").append('<tr><td><input type="submit" value="Submit"></td><td></td></tr>'
 					+'</table>');
 

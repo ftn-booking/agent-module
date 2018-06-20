@@ -11,6 +11,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
@@ -92,6 +93,12 @@ public class Price {
 
 	public void setPricePerDay(double pricePerDay) {
 		this.pricePerDay = pricePerDay;
+	}
+
+	@Override
+	public String toString() {
+		return "Price [id=" + id + ", lodging=" + lodging + ", fromDate=" + fromDate + ", toDate=" + toDate
+				+ ", pricePerDay=" + pricePerDay + "]";
 	}
 	
 	
