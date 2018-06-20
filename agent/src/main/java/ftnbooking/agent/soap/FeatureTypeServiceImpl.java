@@ -31,4 +31,15 @@ public class FeatureTypeServiceImpl implements FeatureTypeService{
 		return featureTypeRepository.findByName(name);
 	}
 
+	@Override
+	public void deleteAll() {
+		featureTypeRepository.deleteAll();
+		
+	}
+
+	@Override
+	public void addAll(List<FeatureType> list) {
+		featureTypeRepository.saveAll(list);
+	}
+
 }

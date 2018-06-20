@@ -26,7 +26,6 @@ public class Reservation {
 
 	@XmlElement(required = true)
 	@Id
-	@GeneratedValue
 	@JsonProperty(access = Access.READ_ONLY)
 	private Long id;
 

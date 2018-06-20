@@ -10,4 +10,8 @@ public interface FeatureTypeService {
 	FeatureType add(FeatureType input);
 
 	FeatureType findByName(String name);
+	
+	void deleteAll();
+	
+	void addAll(List<FeatureType> list);
 }

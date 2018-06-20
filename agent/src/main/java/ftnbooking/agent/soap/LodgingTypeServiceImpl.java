@@ -31,4 +31,16 @@ public class LodgingTypeServiceImpl implements LodgingTypeService{
 		return lodgingTypeRepository.findByName(name);
 	}
 
+	@Override
+	public void deleteAll() {
+		lodgingTypeRepository.deleteAll();
+		
+	}
+
+	@Override
+	public void addAll(List<LodgingType> l) {
+		lodgingTypeRepository.saveAll(l);
+		
+	}
+
 }

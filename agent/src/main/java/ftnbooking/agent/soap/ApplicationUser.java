@@ -1,5 +1,7 @@
 package ftnbooking.agent.soap;
 
+import java.util.UUID;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -10,6 +12,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
@@ -23,7 +26,6 @@ import com.fasterxml.jackson.annotation.JsonProperty.Access;
 public class ApplicationUser {
 	@XmlElement(required = true)
 	@Id
-	@GeneratedValue
 	@JsonProperty(access = Access.READ_ONLY)
 	private Long id;
 
@@ -50,6 +52,9 @@ public class ApplicationUser {
 
 	@XmlElement(required = true)
 	private ApplicationUserType userType = ApplicationUserType.VISITOR;
+
+	@JsonIgnore
+	private String resetToken = UUID.randomUUID().toString();
 	
 	public ApplicationUser() {
 		
@@ -123,6 +128,13 @@ public class ApplicationUser {
 
 	public void setUserType(ApplicationUserType userType) {
 		this.userType = userType;
+	}
+
+	@Override
+	public String toString() {
+		return "ApplicationUser [id=" + id + ", version=" + version + ", email=" + email + ", password=" + password
+				+ ", name=" + name + ", lastName=" + lastName + ", city=" + city + ", phoneNumber=" + phoneNumber
+				+ ", userType=" + userType + ", resetToken=" + resetToken + "]";
 	}
 	
 	

@@ -25,7 +25,6 @@ import javax.xml.bind.annotation.XmlType;
 public class FeatureType {
 	@XmlElement(required = true)
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 	
 	@XmlElement(required = true)

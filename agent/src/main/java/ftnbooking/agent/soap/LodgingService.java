@@ -97,5 +97,13 @@ public interface LodgingService {
 	    public Long addPrice(
 	        @WebParam(name = "arg0", targetNamespace = "")
 	        Price arg0);
+	 
+	 @WebMethod
+	 @WebResult(targetNamespace = "")
+	    @RequestWrapper(localName = "synchronizeApplicationUser", targetNamespace = "https://soap.agent.ftnbooking", className = "ftnbooking.agent.soap.SynchronizeApplicationUser")
+	    @ResponseWrapper(localName = "synchronizeApplicationUserResponse", targetNamespace = "https://soap.agent.ftnbooking", className = "ftnbooking.agent.soap.SynchronizeApplicationUserResponse")
+	    public List<ApplicationUser> synchronizeApplicationUser(
+	       );
+	 
 
 }

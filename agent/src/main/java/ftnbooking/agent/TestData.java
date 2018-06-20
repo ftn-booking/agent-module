@@ -1,10 +1,14 @@
 package ftnbooking.agent;
 
+import java.util.List;
+
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import ftnbooking.agent.soap.ApplicationUser;
+import ftnbooking.agent.soap.ApplicationUserRepository;
 import ftnbooking.agent.soap.FeatureType;
 import ftnbooking.agent.soap.FeatureTypeService;
 import ftnbooking.agent.soap.FoodServiceType;
@@ -26,10 +30,12 @@ public class TestData {
 	private FeatureTypeService featureTypeService;
 	@Autowired
 	private FoodServiceTypeService foodServiceTypeService;
-
+	@Autowired
+	private ApplicationUserRepository applicationUserRepository;
+	
 	@PostConstruct
 	private void init() {
-		LodgingType lodgingType1 = new LodgingType("HOTEL");
+		/*LodgingType lodgingType1 = new LodgingType("HOTEL");
 		LodgingType lodgingType2 = new LodgingType("B & B");
 		LodgingType lodgingType3 = new LodgingType("APARTMENT");
 		lodgingTypeService.add(lodgingType1);
@@ -50,8 +56,19 @@ public class TestData {
 		FoodServiceType f3 = new FoodServiceType("Full Board");
 		foodServiceTypeService.add(f1);
 		foodServiceTypeService.add(f2);
-		foodServiceTypeService.add(f3);
-		
+		foodServiceTypeService.add(f3);*/
+		List<FeatureType> fts = lodgingService.synchronizeFeatureType();
+		List<FoodServiceType> fsts = lodgingService.synchronizeFoodServiceType();
+		List<LodgingType> lts = lodgingService.synchronizeLodgingType();
+		List<ApplicationUser> aus = lodgingService.synchronizeApplicationUser();
+		featureTypeService.deleteAll();
+		featureTypeService.addAll(fts);
+		foodServiceTypeService.deleteAll();
+		foodServiceTypeService.addAll(fsts);
+		lodgingTypeService.deleteAll();
+		lodgingTypeService.addAll(lts);
+		applicationUserRepository.deleteAll();
+		applicationUserRepository.saveAll(aus);
 	}
 	
 }

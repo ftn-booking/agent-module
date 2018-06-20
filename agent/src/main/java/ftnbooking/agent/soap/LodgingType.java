@@ -19,7 +19,6 @@ import javax.xml.bind.annotation.XmlType;
 public class LodgingType {
 	@XmlElement(required = true)
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 	
 	@XmlElement(required = true)

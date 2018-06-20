@@ -2,6 +2,7 @@ package ftnbooking.agent.app;
 
 import java.util.List;
 
+import ftnbooking.agent.soap.ApplicationUser;
 import ftnbooking.agent.soap.Lodging;
 
 public interface LodgingServiceLocal {
@@ -12,4 +13,5 @@ public interface LodgingServiceLocal {
 	
 	Lodging findOne(Long id);
 
+	void synchronize(ApplicationUser user);
 }

@@ -11,4 +11,7 @@ public interface LodgingTypeService {
 
 	LodgingType findByName(String name);
 
+	void deleteAll();
+	
+	void addAll(List<LodgingType> l);
 }

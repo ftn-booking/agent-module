@@ -11,4 +11,8 @@ public interface FoodServiceTypeService {
 	List<FoodServiceType> findAll();
 
 	FoodServiceType findByName(String name);
+	
+	void deleteAll();
+	
+	void addAll(List<FoodServiceType> list);
 }

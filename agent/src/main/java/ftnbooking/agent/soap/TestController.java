@@ -1,5 +1,7 @@
 package ftnbooking.agent.soap;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -45,5 +47,17 @@ public class TestController {
 		lodging.setAgent(user3);
 		Long id = lodgingService.addLodging(lodging);
 		return 0L;
+	}
+	
+	@GetMapping("/fst")
+	public List<FoodServiceType> testFoodServiceType() {
+		List<FoodServiceType> list = lodgingService.synchronizeFoodServiceType();
+		return list;
+	}
+	
+	@GetMapping("/users")
+	public List<ApplicationUser> testApplicationUser() {
+		List<ApplicationUser> list = lodgingService.synchronizeApplicationUser();
+		return list;
 	}
 }

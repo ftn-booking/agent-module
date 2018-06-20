@@ -31,4 +31,14 @@ public class FoodServiceTypeServiceImpl implements FoodServiceTypeService{
 		return foodServiceRepository.findByName(name);
 	}
 
+	@Override
+	public void deleteAll() {
+		foodServiceRepository.deleteAll();
+	}
+
+	@Override
+	public void addAll(List<FoodServiceType> list) {
+		foodServiceRepository.saveAll(list);
+	}
+
 }

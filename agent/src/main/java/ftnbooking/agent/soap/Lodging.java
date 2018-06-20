@@ -35,7 +35,6 @@ public class Lodging {
 
 	@XmlElement(required = true)
 	@Id
-	@GeneratedValue
 	@JsonProperty(access = Access.READ_ONLY)
 	private Long id;
 
@@ -86,7 +85,7 @@ public class Lodging {
 	private List<String> imagePaths = new ArrayList<String>();
 
 	@XmlElement(required = true)
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.EAGER)
 	private ApplicationUser agent;
 	
 	public Lodging() {}
