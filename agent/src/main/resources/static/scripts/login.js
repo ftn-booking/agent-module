@@ -14,14 +14,14 @@ $(function() {
                 "password": password
             }), success: function(data){
             		$.post({
-            			url: "https://localhost:8081/lodging/synchronize/"+email
+            			url: "https://localhost:8081/lodging/synchronize/"+email,
             		})
-            		alert(email);
-					Cookies.set('token', data, {expires: 10, path: '/', secure: true});
+            		Cookies.set('token', data, {expires: 10, path: '/', secure: true});
 					Cookies.set('user', email, {expires: 10, path: '/', secure: true});
-					window.location.replace('/home.html');
-					//maybe more stuff here
-
+					
+					
+					setTimeout(function(){window.location.replace('/home.html');}, 350);
+				
             }, error: function(data){
 					console.log(data);
 				    $("#loginMessage").empty();

@@ -133,6 +133,13 @@ public class Reservation {
 	public void setRating(Integer rating) {
 		this.rating = rating;
 	}
+
+	@Override
+	public String toString() {
+		return "Reservation [id=" + id + ", version=" + version + ", user=" + user + ", lodging=" + lodging
+				+ ", fromDate=" + fromDate + ", toDate=" + toDate + ", approved=" + approved + ", rating=" + rating
+				+ "]";
+	}
 	
 	
 

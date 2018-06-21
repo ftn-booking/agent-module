@@ -23,9 +23,23 @@
 	
 		</div>
 
-		<table id="timeFrame"><br>
-			<tr id="mid"><th>Start Date</th><th>End Date</th><th>Price</th></tr>
-		</table>
+		<div id="tables" >
+		 	<div id="leftTable" style="float: left; width:50%">
+			<div id="leftButton"></div><br>
+				<table id="timeFrame">
+					<tr id="mid"><th>Start Date</th><th>End Date</th><th>Price</th></tr>
+				</table>
+			</div>
+			
+			<div id="rightTable" style="float: right; width:50%">
+			<div id="rightButton"></div><br>
+				<table id="reservationsTable">
+					<tr id="mid"><th>Who</th><th>Start Date</th><th>End Date</th><th>Attended</th></tr>
+				</table>
+			
+			</div>
+			
+		</div>
 	</div>
 	<div class="formContainer">
 		<div class="modal fade" id="addModal" tabindex="-1" role="dialog">
@@ -62,6 +76,45 @@
 			</div>
 		</div>
 	</div>
+	
+	
+	<div class="formContainer">
+		<div class="modal fade" id="addReservationModal" tabindex="-1" role="dialog">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="addModalLabel">Add Reservation</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<form id="addReservationForm">
+						<div class="modal-body">
+							<input type="hidden" name="id" id="id"/>
+							<table>
+							<p>
+								<tr><td><label for="modalPrice">E-mail</label> </td><td> <input type="text" name="code"
+																		  id="reservationEmail" /> </td></tr>
+							</p>
+							<p>
+								<tr><td><label for="modalReservationDateFrom">From</label> </td><td> <input type="date" id="dateReservationFrom"/> </td></tr>
+							</p>
+							<p>
+								<tr><td><label for="modalReservationDateTo">To</label></td><td> <input type="date" id="dateReservationTo"/></td></tr>
+							</p>
+							</table>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+							<button type="button" class="btn btn-primary" id="addRes">Confirm</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
 </div>
 </body>
 

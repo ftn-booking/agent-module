@@ -50,10 +50,12 @@ function getLodging(){
 					+'<br><label>Food Service:&nbsp;</label>' + data.foodServiceType.name 
 					+'<br><label>Features:&nbsp;</label>' + features.substring(2)
 					+'<br>Images:<div class="row"><br></div>'
-					+'<br><button id="priceRange">Set price for timeframe</button>'
+					+'<br>'
 			);
+			$("#leftButton").html('<button id="priceRange">Set price for timeframe</button>');
+			$("#rightButton").html('<button id="addReservation">Add reservation</button>');
 			data.imagePaths.forEach(function(path){
-				$(".row").append('<div class="column"><br><a href="' + path + '" target="_blank"><img src="' + path + '" width="96" height="96"></a></div>')
+				$(".row").append('<div class="column"><br><a href="' + path + '" target="_blank"><img src="' + path + '" onerror="this.src=\"' + path + '\"" width="224" height="96"></a></div>')
 			});
 			
 		}
@@ -71,11 +73,61 @@ function getLodging(){
 		}
 	});
 	
+	$.get({
+		url: "/reservation/"+tgt,
+		success: function(x){
+			for(var i = 0; i < x.length; i++){
+				var sD = new Date(x[i].fromDate);
+				var eD = new Date(x[i].toDate);
+				$("#reservationsTable").append('<tr><td>'+x[i].user.email+'</td><td>'+sD.toString().substring(4,15)+'</td><td>'+eD.toString().substring(4,15)+'</td><td>'+''+'</td></tr>');
+			}
+		}
+	});
+	
 }
 
 $(document).on('click','#priceRange',function(e){
 	e.preventDefault();
 	$('#addModal').modal();
+});
+
+$(document).on('click','#addReservation',function(e){
+	e.preventDefault();
+	$('#addReservationModal').modal();
+});
+
+$(document).on('click',"#addRes", function(e){
+	e.preventDefault();
+	var email = $("#reservationEmail").val();
+	var dateFrom = $("#dateReservationFrom").val();
+	var dateTo = $("#dateReservationTo").val();
+	var lodging = window.location.href.split("id=")[1];
+	
+	if(new Date(dateFrom) > new Date(dateTo)){
+		alert('start date can\'t be behind end date');
+		return;
+	}
+	
+	$.post({
+		url:"/reservation",
+		contentType: "application/json",
+        dataType: "text",
+		data: JSON.stringify({
+			"user": email,
+			"fromDate": dateFrom,
+			"toDate": dateTo,
+			"lodging": lodging,
+			"approved": false
+		}),
+		success: function(data){
+			$("#addReservationModal").modal('toggle');
+			$("#timeFrame").find("tr:gt(0)").remove();
+			$("#reservationsTable").find("tr:gt(0)").remove();
+			getLodging();
+			
+		}
+	})
+	
 });
 
 $(document).on('click',"#addData", function(e){
@@ -103,8 +155,8 @@ $(document).on('click',"#addData", function(e){
 		success: function(dataP){
 			$("#addModal").modal('toggle');
 			$("#timeFrame").find("tr:gt(0)").remove();
+			$("#reservationsTable").find("tr:gt(0)").remove();
 			getLodging();
-			console.log(dataP);
 		}
 	})
 	

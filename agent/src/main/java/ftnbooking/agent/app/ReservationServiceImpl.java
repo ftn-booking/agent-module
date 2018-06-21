@@ -1,0 +1,36 @@
+package ftnbooking.agent.app;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import ftnbooking.agent.soap.Lodging;
+import ftnbooking.agent.soap.Reservation;
+import ftnbooking.agent.soap.ReservationRepository;
+
+@Service
+public class ReservationServiceImpl implements ReservationServiceLocal{
+
+	@Autowired
+	private ReservationRepository reservationRepository;
+	
+	
+	@Override
+	public Reservation findOne(Long id) {
+		return reservationRepository.findById(id).orElse(null);
+	}
+
+	@Override
+	public List<Reservation> findByLodging(Lodging l) {
+		return reservationRepository.findByLodging(l);
+	}
+
+	@Override
+	public Reservation add(Reservation r) {
+		return reservationRepository.save(r);
+	}
+
+	
+	
+}

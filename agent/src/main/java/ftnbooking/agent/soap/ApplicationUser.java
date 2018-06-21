@@ -52,7 +52,10 @@ public class ApplicationUser {
 
 	@XmlElement(required = true)
 	private ApplicationUserType userType = ApplicationUserType.VISITOR;
-
+	
+	@XmlElement()
+	private String pid;
+	
 	@JsonIgnore
 	private String resetToken = UUID.randomUUID().toString();
 	
