@@ -31,6 +31,14 @@ public class ReservationServiceImpl implements ReservationServiceLocal{
 		return reservationRepository.save(r);
 	}
 
-	
+	@Override
+	public boolean validate(Reservation r) {
+		List<Reservation> reservations = reservationRepository
+				.findByLodgingAndToDateGreaterThanAndFromDateLessThan(r.getLodging(), r.getFromDate(), r.getToDate());
+		if(reservations == null || reservations.isEmpty())
+			// There are no other prices for this lodging at specified time
+			return true;
+		return false;
+	}
 	
 }

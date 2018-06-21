@@ -12,4 +12,6 @@ public interface ReservationServiceLocal {
 	List<Reservation> findByLodging(Lodging l);
 	
 	Reservation add(Reservation r);
+	
+	boolean validate(Reservation r);
 }
