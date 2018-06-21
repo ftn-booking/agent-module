@@ -14,7 +14,7 @@ $(function() {
                 "password": password
             }), success: function(data){
             		$.post({
-            			url: "https://localhost:8081/lodging/synchronize/"+email,
+            			url: "/lodging/synchronize/"+email,
             		})
             		Cookies.set('token', data, {expires: 10, path: '/', secure: true});
 					Cookies.set('user', email, {expires: 10, path: '/', secure: true});
