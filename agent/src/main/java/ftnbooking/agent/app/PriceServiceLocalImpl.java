@@ -29,6 +29,16 @@ public class PriceServiceLocalImpl implements PriceServiceLocal{
 	public List<Price> findByLodging(Lodging l) {
 		return priceRepository.findByLodging(l);
 	}
+
+	@Override
+	public boolean validate(Price p) {
+		List<Price> prices = priceRepository
+				.findByLodgingAndToDateGreaterThanAndFromDateLessThan(p.getLodging(), p.getFromDate(), p.getToDate());
+		if(prices == null || prices.isEmpty())
+			// There are no other prices for this lodging at specified time
+			return true;
+		return false;
+	}
 	
 	
 }

@@ -33,6 +33,8 @@ public class PriceController {
 		p.setFromDate(price.getFromDate().getTime());
 		p.setToDate(price.getToDate().getTime());
 		p.setLodging(lodgingServiceLocal.findOne(price.getLodging()));
+		if(!priceServiceLocal.validate(p))
+			return new ResponseEntity<>(null, HttpStatus.NOT_ACCEPTABLE);
 		p.setId(lodgingService.addPrice(p));
 		return new ResponseEntity<>(priceServiceLocal.addPrice(p), HttpStatus.OK);
 	}

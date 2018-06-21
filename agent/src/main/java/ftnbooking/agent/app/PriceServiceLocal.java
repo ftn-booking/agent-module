@@ -13,4 +13,6 @@ public interface PriceServiceLocal {
 	
 	List<Price> findByLodging(Lodging l);
 	
+	boolean validate(Price p);
+	
 }

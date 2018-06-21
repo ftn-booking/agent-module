@@ -16,7 +16,7 @@ $(function() {
             		$.post({
             			url: "https://localhost:8081/lodging/synchronize/"+email
             		})
-            		//alert(email);
+            		alert(email);
 					Cookies.set('token', data, {expires: 10, path: '/', secure: true});
 					Cookies.set('user', email, {expires: 10, path: '/', secure: true});
 					window.location.replace('/home.html');
