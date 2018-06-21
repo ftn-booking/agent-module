@@ -120,5 +120,13 @@ public interface LodgingService {
 	    public boolean changePassword(
 	        @WebParam(name = "arg0", targetNamespace = "")
 	        ApplicationUser arg0);
+	 
+	 @WebMethod
+	    @WebResult(targetNamespace = "")
+	    @RequestWrapper(localName = "sendMessage", targetNamespace = "https://soap.agent.ftnbooking", className = "ftnbooking.agent.soap.SendMessage")
+	    @ResponseWrapper(localName = "sendMessageResponse", targetNamespace = "https://soap.agent.ftnbooking", className = "ftnbooking.agent.soap.SendMessageResponse")
+	    public Long sendMessage(
+	        @WebParam(name = "arg0", targetNamespace = "")
+	        Message arg0);
 
 }
