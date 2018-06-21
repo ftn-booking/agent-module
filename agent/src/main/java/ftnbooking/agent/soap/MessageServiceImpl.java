@@ -31,4 +31,9 @@ public class MessageServiceImpl implements MessageService{
 		return messageRepository.save(input);
 	}
 
+	@Override
+	public List<Message> findByReservation(Reservation reservation) {
+		return messageRepository.findByReservation(reservation);
+	}
+
 }

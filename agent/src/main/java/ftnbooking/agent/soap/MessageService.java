@@ -12,4 +12,6 @@ public interface MessageService {
 	public List<Message> findByAgent(ApplicationUser user);
 	
 	public Message add(Message input);
+
+	public List<Message> findByReservation(Reservation reservation);
 }

@@ -42,7 +42,6 @@ public class PriceController {
 	@GetMapping("/{id}")
 	public ResponseEntity<?> getPrices(@PathVariable Long id){
 		List<Price> prices = priceServiceLocal.findByLodging(lodgingServiceLocal.findOne(id));
-		System.out.println(prices.toString());
 		return new ResponseEntity<>(prices,HttpStatus.OK);
 	}
 }

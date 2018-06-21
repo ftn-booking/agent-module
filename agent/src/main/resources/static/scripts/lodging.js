@@ -15,7 +15,6 @@ $(document).ready(function(){
 			} else {
 				Cookies.set('agent', data, {expires: 10, path: '/', secure: true})
 				//$('p').append(data.name);
-				t1=data.id;
 				getLodging();
 			}
 		}, error: function(data){
@@ -79,22 +78,68 @@ function getLodging(){
 			for(var i = 0; i < x.length; i++){
 				var sD = new Date(x[i].fromDate);
 				var eD = new Date(x[i].toDate);
-				$("#reservationsTable").append('<tr><td>'+x[i].user.email+'</td><td>'+sD.toString().substring(4,15)+'</td><td>'+eD.toString().substring(4,15)+'</td><td>'+''+'</td></tr>');
+				$("#reservationsTable").append('<tr><td>'+x[i].user.email+'</td><td>'+sD.toString().substring(4,15)
+						+'</td><td>'+eD.toString().substring(4,15)+'</td><td><a class="msg" href="/messages/'+x[i].id+'">check</a></td><td>'+''+'</td></tr>');
 			}
 		}
 	});
 	
+	
+	
 }
+var resID = null;
+$(document).on("click", ".msg", function(e){
+	e.preventDefault();
+	var url = $(this).attr("href");
+	resID = url.substring(10);
+	$("#messagesHere").empty();
+	
+	$.get({
+		url: url,
+		success: function(data){
+			console.log(data);
+			for(var i = 0; i < data.length; i++){
+				var ft = (data.userSent == true) ? "From" : "To";
+				$("#messagesHere").append('<div><p>'+ft+' '+data[i].user.name+' ['+data[i].user.email+']: '+data[i].content+'<p><div>');
+			}
+		}
+	})
+	$("#responseBox").html('<div><textarea id="msgResponse" rows="4" cols="56"></textarea></div>');
+	
+	$("#messageModal").modal();
+})
 
+var lodging = '';
 $(document).on('click','#priceRange',function(e){
 	e.preventDefault();
 	$('#addModal').modal();
 });
 
+
 $(document).on('click','#addReservation',function(e){
 	e.preventDefault();
 	$('#addReservationModal').modal();
 });
+
+$(document).on('click',"#sendMessage", function(e){
+	e.preventDefault();
+	var content = $("#msgResponse").val();
+	var reservation = resID;
+	$.post({
+		url: "/messages",
+		contentType: "application/json",
+        dataType: "text",
+		data: JSON.stringify({
+			"content": content,
+			"reservation": reservation
+		}),
+		success: function(data){
+			$("#messageModal").modal("toggle");
+			
+		}
+	});
+	
+})
 
 $(document).on('click',"#addRes", function(e){
 	e.preventDefault();

@@ -17,3 +17,12 @@
 table, th, td {
 	border: 1px solid black;
 }
+
+#messagesHere {
+	overflow-y: scroll;
+	max-height: 400px;
+	/*	
+	overflow-x: hidden;
+	max-height: 80vh;
+	*/
+}

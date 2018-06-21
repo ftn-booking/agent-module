@@ -33,7 +33,7 @@ public class ReservationController {
 		r.setLodging(lodgingServiceLocal.findOne(rDTO.getLodging()));
 		r.setRating(rDTO.getRating());
 		r.setRating(4); //XXX: temporary
-		r.setId(lodgingService.reserveLodging(r)); //moja greska, skrnavo sam nazvao, realizeReservation je za kad stavis da je neko bio
+		r.setId(lodgingService.reserveLodging(r));
 		return new ResponseEntity<>(reservationServiceLocal.add(r), HttpStatus.OK);
 	}
 	
@@ -44,7 +44,7 @@ public class ReservationController {
 	
 /*	@PutMapping("/id}")
 	public ResponseEntity<?> approve(@PathVariable Long id){
-		//changing approved to true //that'll be this probablyok
+		//changing approved to true 
 	}
 */
 }

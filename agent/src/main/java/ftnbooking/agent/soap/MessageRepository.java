@@ -10,4 +10,5 @@ public interface MessageRepository extends JpaRepository<Message, Long> {
 	
 	List<Message> findByReservation_Lodging_Agent(ApplicationUser user);
 	
+	List<Message> findByReservation(Reservation reservation);
 }

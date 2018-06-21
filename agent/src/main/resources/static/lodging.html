@@ -34,7 +34,7 @@
 			<div id="rightTable" style="float: right; width:50%">
 			<div id="rightButton"></div><br>
 				<table id="reservationsTable">
-					<tr id="mid"><th>Who</th><th>Start Date</th><th>End Date</th><th>Attended</th></tr>
+					<tr id="mid"><th>Who</th><th>Start Date</th><th>End Date</th><th>Messages</th><th>Attended</th></tr>
 				</table>
 			
 			</div>
@@ -113,6 +113,50 @@
 			</div>
 		</div>
 	</div>
+
+	<div class="formContainer">
+		<div class="modal fade" id="messageModal" tabindex="-1" role="dialog">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="messageLabel">Messenger™</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<form id="addMessageForm">
+						<div class="modal-body">
+							
+							<input type="hidden" name="id" id="id"/>
+							
+							<div id="messagesHere">
+							</div>
+							<div id="responseBox"></div>
+							<!-- 
+							<table>
+							<p>
+								<tr><td><label for="modalPrice">E-mail</label> </td><td> <input type="text" name="code"
+																		  id="reservationEmail" /> </td></tr>
+							</p>
+							<p>
+								<tr><td><label for="modalReservationDateFrom">From</label> </td><td> <input type="date" id="dateReservationFrom"/> </td></tr>
+							</p>
+							<p>
+								<tr><td><label for="modalReservationDateTo">To</label></td><td> <input type="date" id="dateReservationTo"/></td></tr>
+							</p>
+							</table>
+							 -->
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+							<button type="button" class="btn btn-primary" id="sendMessage">Confirm</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
 	
 	
 </div>

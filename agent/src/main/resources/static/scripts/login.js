@@ -19,9 +19,9 @@ $(function() {
             		Cookies.set('token', data, {expires: 10, path: '/', secure: true});
 					Cookies.set('user', email, {expires: 10, path: '/', secure: true});
 					
-					
-					setTimeout(function(){window.location.replace('/home.html');}, 350);
-				
+					alert('seems like we\'re back to this');
+					//setTimeout(function(){window.location.replace('/home.html');}, 350);
+					window.location.replace('/home.html');
             }, error: function(data){
 					console.log(data);
 				    $("#loginMessage").empty();
