@@ -67,4 +67,18 @@ public class TestController {
 		List<Lodging> list = lodgingService.synchronizeLodging(arg0);
 		return list;
 	}
+	
+	@GetMapping("/reservations")
+	public List<Reservation> testReservations() {
+		ApplicationUser arg0 = applicationUserRepository.findByEmail("han@me");
+		List<Reservation> list = lodgingService.synchronizeReservation(arg0);
+		return list;
+	}
+	
+	@GetMapping("/prices")
+	public List<Price> testPrices() {
+		ApplicationUser arg0 = applicationUserRepository.findByEmail("han@me");
+		List<Price> list = lodgingService.synchronizePrice(arg0);
+		return list;
+	}
 }

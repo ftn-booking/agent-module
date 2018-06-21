@@ -112,5 +112,13 @@ public interface LodgingService {
 	    public List<Message> synchronizeMessage(
 	        @WebParam(name = "arg0", targetNamespace = "")
 	        ApplicationUser arg0);
+	 
+	 @WebMethod
+	 @WebResult(targetNamespace = "")
+	    @RequestWrapper(localName = "changePassword", targetNamespace = "https://soap.agent.ftnbooking", className = "ftnbooking.agent.soap.ChangePassword")
+	    @ResponseWrapper(localName = "changePasswordResponse", targetNamespace = "https://soap.agent.ftnbooking", className = "ftnbooking.agent.soap.ChangePasswordResponse")
+	    public boolean changePassword(
+	        @WebParam(name = "arg0", targetNamespace = "")
+	        ApplicationUser arg0);
 
 }

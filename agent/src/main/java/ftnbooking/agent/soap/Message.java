@@ -43,6 +43,8 @@ public class Message {
 	@NotNull
 	private String content;
 	
+	@XmlElement(required = true)
+	private boolean userSent;
 	public Message() {
 		
 	}
@@ -84,6 +86,14 @@ public class Message {
 
 	public void setContent(String content) {
 		this.content = content;
+	}
+
+	public boolean isUserSent() {
+		return userSent;
+	}
+
+	public void setUserSent(boolean userSent) {
+		this.userSent = userSent;
 	}
 	
 	
