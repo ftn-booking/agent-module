@@ -42,14 +42,13 @@ public class ReservationController {
 		return new ResponseEntity<>(reservationServiceLocal.findByLodging(lodgingServiceLocal.findOne(id)),HttpStatus.OK);
 	}
 	
-	@PostMapping("/approve/id}")
-	public ResponseEntity<?> approve(@PathVariable Long id){ //sto  se i za put buni?? o>O wish I knew, da menjam na post ili nesto? promeni na post ok
+	@PostMapping("/{id}")
+	public ResponseEntity<?> approve(@PathVariable Long id){
 		Reservation r = reservationServiceLocal.findOne(id);
-		r.setApproved(true); //mislim da ovako treba, onako ne menjas nista na backendu, probaj sad, ali ne ocekujem drugacij rez
-		if(id == lodgingService.realizeReservation(r)) {
-			
-			reservationServiceLocal.add(r); //gde je impl? /ti ne pozivas backend? na backendu se ne buni, sto je weird yup
-		
+		r.setApproved(true); 
+		Long res = lodgingService.realizeReservation(r);
+		if(id == res) {
+			reservationServiceLocal.add(r); 
 			return new ResponseEntity<>(HttpStatus.OK);
 		}
 		return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

@@ -32,7 +32,7 @@ public class ReservationServiceImpl implements ReservationServiceLocal{
 	}
 
 	@Override
-	public boolean validate(Reservation r) {
+	public boolean validate(Reservation r) { //silly me
 		List<Reservation> reservations = reservationRepository
 				.findByLodgingAndToDateGreaterThanAndFromDateLessThan(r.getLodging(), r.getFromDate(), r.getToDate());
 		if(reservations == null || reservations.isEmpty())

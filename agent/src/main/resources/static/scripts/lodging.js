@@ -79,7 +79,7 @@ function getLodging(){
 				console.log(x[i]);
 				var sD = new Date(x[i].fromDate);
 				var eD = new Date(x[i].toDate);
-				var status = (x[i].approved) ? '<img src="img/checkmark.png" width="16" height="16">' : '<a class="approve" href="/reservation/'+x[i].id+'">Approve</a>';
+				var status = (x[i].approved) ? '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="img/checkmark.png" width="16" height="16">' : '<a class="approve" href="/reservation/'+x[i].id+'">Approve</a>';
 				$("#reservationsTable").append('<tr><td>'+x[i].user.email+'</td><td>'+sD.toString().substring(4,15)	
 						+'</td><td>'+eD.toString().substring(4,15)+'</td><td><a class="msg" href="/messages/'+x[i].id+'">check</a></td><td>'+status+'</td></tr>');
 			}
@@ -93,11 +93,14 @@ function getLodging(){
 $(document).on('click','.approve',function(e){
 	e.preventDefault();
 	var url = $(this).attr('href');
-	$.ajax({
-		type: "POST",
+	
+	var obj = $(this).closest('td');
+	
+	$.post({
 		url: url,
 		success: function(data){
-			$(this).closest('td').html('<img src="img/checkmark.png" width="16" height="16">');
+			console.log('yes');
+			$(obj).html('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="img/checkmark.png" width="16" height="16">');
 		}
 	});
 	
