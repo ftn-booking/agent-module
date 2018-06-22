@@ -128,5 +128,21 @@ public interface LodgingService {
 	    public Long sendMessage(
 	        @WebParam(name = "arg0", targetNamespace = "")
 	        Message arg0);
+	 
+	 @WebMethod
+	 @WebResult(targetNamespace = "")
+	    @RequestWrapper(localName = "deleteLodging", targetNamespace = "https://soap.agent.ftnbooking", className = "ftnbooking.agent.soap.DeleteLodging")
+	    @ResponseWrapper(localName = "deleteLodgingResponse", targetNamespace = "https://soap.agent.ftnbooking", className = "ftnbooking.agent.soap.DeleteLodgingResponse")
+	    public boolean deleteLodging(
+	        @WebParam(name = "arg0", targetNamespace = "")
+	        Lodging arg0);
+	 
+	 @WebMethod
+	 @WebResult(targetNamespace = "")
+	    @RequestWrapper(localName = "deleteReservation", targetNamespace = "https://soap.agent.ftnbooking", className = "ftnbooking.agent.soap.DeleteReservation")
+	    @ResponseWrapper(localName = "deleteReservationResponse", targetNamespace = "https://soap.agent.ftnbooking", className = "ftnbooking.agent.soap.DeleteReservationResponse")
+	    public boolean deleteReservation(
+	        @WebParam(name = "arg0", targetNamespace = "")
+	        Reservation arg0);
 
 }
