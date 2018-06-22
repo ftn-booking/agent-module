@@ -76,10 +76,12 @@ function getLodging(){
 		url: "/reservation/"+tgt,
 		success: function(x){
 			for(var i = 0; i < x.length; i++){
+				console.log(x[i]);
 				var sD = new Date(x[i].fromDate);
 				var eD = new Date(x[i].toDate);
-				$("#reservationsTable").append('<tr><td>'+x[i].user.email+'</td><td>'+sD.toString().substring(4,15)
-						+'</td><td>'+eD.toString().substring(4,15)+'</td><td><a class="msg" href="/messages/'+x[i].id+'">check</a></td><td>'+''+'</td></tr>');
+				var status = (x[i].approved) ? '<img src="img/checkmark.png" width="16" height="16">' : '<a class="approve" href="/reservation/'+x[i].id+'">Approve</a>';
+				$("#reservationsTable").append('<tr><td>'+x[i].user.email+'</td><td>'+sD.toString().substring(4,15)	
+						+'</td><td>'+eD.toString().substring(4,15)+'</td><td><a class="msg" href="/messages/'+x[i].id+'">check</a></td><td>'+status+'</td></tr>');
 			}
 		}
 	});
@@ -87,6 +89,20 @@ function getLodging(){
 	
 	
 }
+
+$(document).on('click','.approve',function(e){
+	e.preventDefault();
+	var url = $(this).attr('href');
+	$.ajax({
+		type: "POST",
+		url: url,
+		success: function(data){
+			$(this).closest('td').html('<img src="img/checkmark.png" width="16" height="16">');
+		}
+	});
+	
+});
+
 var resID = null;
 $(document).on("click", ".msg", function(e){
 	e.preventDefault();
