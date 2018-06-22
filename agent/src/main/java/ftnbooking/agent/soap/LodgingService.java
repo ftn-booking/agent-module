@@ -144,5 +144,13 @@ public interface LodgingService {
 	    public boolean deleteReservation(
 	        @WebParam(name = "arg0", targetNamespace = "")
 	        Reservation arg0);
+	 
+	 @WebMethod
+	 @WebResult(targetNamespace = "")
+	    @RequestWrapper(localName = "deletePrice", targetNamespace = "https://soap.agent.ftnbooking", className = "ftnbooking.agent.soap.DeletePrice")
+	    @ResponseWrapper(localName = "deletePriceResponse", targetNamespace = "https://soap.agent.ftnbooking", className = "ftnbooking.agent.soap.DeletePriceResponse")
+	    public boolean deletePrice(
+	        @WebParam(name = "arg0", targetNamespace = "")
+	        Price arg0);
 
 }
