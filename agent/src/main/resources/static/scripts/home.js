@@ -15,7 +15,7 @@ $(document).ready(function(){
 				Cookies.set('agent', data, {expires: 10, path: '/', secure: true})
 				$('p').append(data.name);
 				t1=data.id;
-				home();
+				sync(mail);
 			}
 		}, error: function(data){
 			
@@ -26,6 +26,15 @@ $(document).ready(function(){
 	});
 	
 });
+function sync(mail){
+	$.post({
+		url: "/lodging/synchronize/"+mail,
+		success: function(data){
+			home();
+		}
+	});	
+	
+}
 
 function home(){
 	$("#middle").empty();

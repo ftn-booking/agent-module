@@ -13,13 +13,10 @@ $(function() {
                 "email": email,
                 "password": password
             }), success: function(data){
-            		$.post({
-            			url: "/lodging/synchronize/"+email,
-            		})
+            		
             		Cookies.set('token', data, {expires: 10, path: '/', secure: true});
 					Cookies.set('user', email, {expires: 10, path: '/', secure: true});
 					
-					alert('seems like we\'re back to this');
 					//setTimeout(function(){window.location.replace('/home.html');}, 350);
 					window.location.replace('/home.html');
             }, error: function(data){
