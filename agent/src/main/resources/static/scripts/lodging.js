@@ -99,7 +99,7 @@ $(document).on("click", ".msg", function(e){
 		success: function(data){
 			console.log(data);
 			for(var i = 0; i < data.length; i++){
-				var ft = (data.userSent == true) ? "From" : "To";
+				var ft = (data[i].userSent == true) ? "From" : "To";
 				$("#messagesHere").append('<div><p>'+ft+' '+data[i].user.name+' ['+data[i].user.email+']: '+data[i].content+'<p><div>');
 			}
 		}
