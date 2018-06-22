@@ -57,6 +57,32 @@ public class LodgingController {
 		return new ResponseEntity<>(lodging, HttpStatus.OK);
 	}
 	
+	@PutMapping("/{id}")
+	public ResponseEntity<?> updateLodging(@PathVariable Long id, @RequestBody LodgingDTO lodgingDTO){
+		Lodging l = lodgingServiceLocal.findOne(id);
+		l.setAddress(lodgingDTO.getAddress());
+		l.setName(lodgingDTO.getName());
+		l.setDescription(lodgingDTO.getDescription());
+		l.setNumberOfBeds(lodgingDTO.getNumberOfBeds());
+		l.setFoodServiceType(foodServiceTypeService.findOne(lodgingDTO.getFoodServiceType()));
+		l.setLodgingType(lodgingTypeService.findOne(lodgingDTO.getLodgingType()));
+		l.setFeatureType(features(lodgingDTO.getFeatureType()));
+		/*TODO: UPDATE*/
+		return new ResponseEntity<>(l,HttpStatus.OK);
+	}
+	
+	
+	@DeleteMapping("/{id}")
+	public ResponseEntity<?> deleteLodging(@PathVariable Long id){
+		System.err.println(id);
+		Lodging l = lodgingServiceLocal.findOne(id);
+		boolean deleted = lodgingService.deleteLodging(l);
+		if (deleted) {
+			return new ResponseEntity<>(lodgingServiceLocal.delete(id), HttpStatus.OK);			
+		}
+		return new ResponseEntity<>("Could not delete lodging",HttpStatus.BAD_REQUEST);
+	}
+	
 	public Set<FeatureType> features(List<Long> feature) {
 		Set<FeatureType> list = new HashSet<>();
 		if(feature == null) {

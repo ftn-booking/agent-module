@@ -8,21 +8,71 @@
 	<script src="scripts/jscookie.js"></script>
     <script src="scripts/home.js"></script>
     <script src="scripts/toastr.min.js"></script>
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-	
+	<script src="scripts/bootstrap.min.js"></script>
+
+    <link href="css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="css/lodging.css" rel="stylesheet"/>
     <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" id="toastr-css"/>
+    <!-- 
     <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet"/>
-    <link href="css/home.css" rel="stylesheet"/>
+     -->
+     <link href="css/home.css" rel="stylesheet"/>
 
 
 </head>
 <body>
-<p>Hello </p>
+<p id="firstName">Hello </p>
 <div id="middle">
 
 </div>
+	<div class="formContainer">
+		<div class="modal fade" id="addModal" tabindex="-1" role="dialog">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="addModalLabel">Add lodging</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<form id="addForm">
+						<div class="add-modal-body" id="add-modal-body">
+							<input type="hidden" name="id" id="id"/>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+							<button type="button" class="btn btn-primary" id="addLodging">Confirm</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
 
-
+</div>
+	<div class="formContainer">
+		<div class="modal fade" id="editModal" tabindex="-1" role="dialog">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="editModalLabel">Edit lodging</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<form id="addForm">
+						<div class="add-modal-body" id="edit-modal-body">
+							<input type="hidden" name="id" id="id"/>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+							<button type="button" class="btn btn-primary" id="editLodging">Confirm</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
 
 
 </body>

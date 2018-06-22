@@ -63,6 +63,16 @@ public class LodgingServiceImpl implements LodgingServiceLocal{
 		messageRepository.deleteAll();
 		messageRepository.saveAll(messages);
 	}
+
+	@Override
+	public Lodging delete(Long id) {
+		Lodging l = findOne(id);
+		if (l == null) {
+			throw new IllegalArgumentException("Tried to delete non existant lodging");
+		}
+		lodgingRepository.delete(l);
+		return l;
+	}
 	
 	
 }

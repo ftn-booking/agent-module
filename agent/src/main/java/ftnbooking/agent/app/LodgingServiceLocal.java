@@ -14,4 +14,6 @@ public interface LodgingServiceLocal {
 	Lodging findOne(Long id);
 
 	void synchronize(ApplicationUser user);
+
+	Lodging delete(Long id);
 }

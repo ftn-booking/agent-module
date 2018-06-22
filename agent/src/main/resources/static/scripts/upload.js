@@ -12,6 +12,6 @@ var feedback = function(res) {
 };
 
 new Imgur({
-    clientid: 'f8462b413c60c3e', 
+    clientid: 'bd61c5ba8077dc0', 
     callback: feedback
 });
