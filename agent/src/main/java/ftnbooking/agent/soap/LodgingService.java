@@ -119,7 +119,9 @@ public interface LodgingService {
 	    @ResponseWrapper(localName = "changePasswordResponse", targetNamespace = "https://soap.agent.ftnbooking", className = "ftnbooking.agent.soap.ChangePasswordResponse")
 	    public boolean changePassword(
 	        @WebParam(name = "arg0", targetNamespace = "")
-	        ApplicationUser arg0);
+	        String arg0,
+	        @WebParam(name = "arg1", targetNamespace = "")
+	        ChangePasswordDTO arg1);
 	 
 	 @WebMethod
 	    @WebResult(targetNamespace = "")
