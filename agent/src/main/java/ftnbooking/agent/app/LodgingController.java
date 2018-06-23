@@ -3,6 +3,7 @@ package ftnbooking.agent.app;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,6 +48,9 @@ public class LodgingController {
 	
 	@GetMapping("/agent/{id}")
 		public ResponseEntity<?> getMyLodgings(@PathVariable Long id){
+		Optional<ApplicationUser> opt = applicationUserRepository.findById(id);
+		ApplicationUser user = opt.get();
+		lodgingServiceLocal.synchronize(user);
 		List<Lodging> lodgings = lodgingServiceLocal.findByAgentId(id);
 		System.out.println("LODGINGSI");
 		//System.out.println(lodgings);s
