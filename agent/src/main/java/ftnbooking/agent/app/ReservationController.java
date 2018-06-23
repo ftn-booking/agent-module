@@ -70,6 +70,7 @@ public class ReservationController {
 		Reservation r = reservationServiceLocal.findOne(id);
 		if(!r.isApproved() && r.getLodging().getAgent().equals(r.getUser())) {
 			lodgingService.deleteReservation(r);
+			reservationServiceLocal.delete(r);
 			return new ResponseEntity<>(HttpStatus.OK);
 		}
 		return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

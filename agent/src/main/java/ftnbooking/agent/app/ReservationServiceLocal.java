@@ -17,4 +17,6 @@ public interface ReservationServiceLocal {
 	boolean validate(Reservation r);
 	
 	boolean validate(Price p);
+	
+	boolean delete(Reservation r);
 }

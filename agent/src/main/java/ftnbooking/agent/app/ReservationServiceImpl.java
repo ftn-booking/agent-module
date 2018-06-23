@@ -50,5 +50,11 @@ public class ReservationServiceImpl implements ReservationServiceLocal{
 		}
 		return false;
 	}
+
+	@Override
+	public boolean delete(Reservation r) {
+		reservationRepository.delete(r);
+		return true;
+	}
 	
 }

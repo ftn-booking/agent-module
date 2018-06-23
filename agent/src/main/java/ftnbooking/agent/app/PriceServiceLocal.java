@@ -15,4 +15,6 @@ public interface PriceServiceLocal {
 	
 	boolean validate(Price p);
 	
+	boolean delete(Price p);
+	
 }

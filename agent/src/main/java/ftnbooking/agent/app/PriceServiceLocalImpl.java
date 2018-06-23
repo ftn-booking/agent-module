@@ -39,6 +39,12 @@ public class PriceServiceLocalImpl implements PriceServiceLocal{
 			return true;
 		return false;
 	}
+
+	@Override
+	public boolean delete(Price p) {
+		priceRepository.delete(p);
+		return true;
+	}
 	
 	
 }

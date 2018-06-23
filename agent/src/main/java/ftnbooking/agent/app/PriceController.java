@@ -53,6 +53,8 @@ public class PriceController {
 	public ResponseEntity<?> delete(@PathVariable Long id) {
 		Price p = priceServiceLocal.findOne(id);
 		if(reservationServiceLocal.validate(p)) {
+			lodgingService.deletePrice(p);
+			priceServiceLocal.delete(p);
 			return new ResponseEntity<>(HttpStatus.OK);
 		}
 		
