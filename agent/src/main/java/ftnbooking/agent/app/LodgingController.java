@@ -126,12 +126,10 @@ public class LodgingController {
 	@PostMapping("/add")
 	public ResponseEntity<?> addLodging(@RequestBody LodgingDTO l1){
 		System.out.println(l1);
-		
 		Lodging l = convert(l1);
 		l.setId(lodgingService.addLodging(l));
-		lodgingServiceLocal.add(l);
 		System.out.println(l);
-		return new ResponseEntity<>(l, HttpStatus.OK);
+		return new ResponseEntity<>(lodgingServiceLocal.add(l), HttpStatus.OK);
 	}
 	
 	@GetMapping("/food/{id}")

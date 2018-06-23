@@ -37,9 +37,6 @@ public class LodgingServiceImpl implements LodgingServiceLocal{
 	
 	@Override
 	public Lodging add(Lodging l) {
-		Long a = lodgingService.addLodging(l);
-		l.setId(a);
-		System.out.println(l);
 		return lodgingRepository.save(l);
 	}
 

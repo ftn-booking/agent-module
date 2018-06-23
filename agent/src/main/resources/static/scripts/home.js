@@ -58,14 +58,14 @@ function editLodging(url){
 			        //+'</div><br>'
 			        //+'<script type="text/javascript" src="scripts/imgur.js"></script>'
 			        //+'<script type="text/javascript" src="scripts/upload.js"></script>'
-					+'<label>Name: </label><input type="text" class="form-control" id="lodgingNameEdit" placeholder="Name">'
+					+'<label>Name: </label><input type="text" class="form-control" id="lodgingNameEdit" onkeyup="this.value=this.value.replace(/[\\d]/,\'\')" placeholder="Name">'
 					+'<label>Address: </label><input type="text" class="form-control" id="lodgingAddressEdit" placeholder="Address">'
 					+'<label>Description: </label><input type="text" class="form-control" id="lodgingDescriptionEdit" placeholder="Description">'
 					+'<label>Category: </label><br><input type="number" id="lodgingCategoryEdit" min="0" max="5" placeholder="Min: 0; Max: 5"><br>'
 					+'<label>Number&nbsp;of&nbsp;beds: </label><br><input type="number" id="lodgingNumberOfBedsEdit" min="1" placeholder="Min: 1"><br>'
-					+'<br><label style="width: 100px">Type: </label><select id="lodgingType">'
+					+'<br><label style="width: 100px">Type: </label><select id="lodgingTypeEdit">'
 					+'</select><br>'
-					+'<label style="width: 100px">Meal: </label><select id="lodgingMeal">'
+					+'<label style="width: 100px">Meal: </label><select id="lodgingMealEdit">'
 					+'</select><br>');
 
 			$("#lodgingNameEdit").val(lodging.name);
@@ -81,8 +81,8 @@ function editLodging(url){
 					for(var i = 0; i < data.length; i++)
 						lodgingTypes+='<option value="'+data[i].id+'">'+data[i].name+'</option>'
 
-					$("#lodgingType").html(lodgingTypes);	
-					$("#lodgingType").val(lodging.lodgingType.id.toString());
+					$("#lodgingTypeEdit").html(lodgingTypes);	
+					$("#lodgingTypeEdit").val(lodging.lodgingType.id.toString());
 				}
 			});
 			
@@ -114,8 +114,8 @@ function editLodging(url){
 					for(var i = 0; i < data.length; i++)
 						foodServiceTypes+='<option value="'+data[i].id+'">'+data[i].name+'</option>'
 						
-						$("#lodgingMeal").html(foodServiceTypes);	
-					$("#lodgingMeal").val(lodging.foodServiceType.id);
+						$("#lodgingMealEdit").html(foodServiceTypes);	
+					$("#lodgingMealEdit").val(lodging.foodServiceType.id);
 						
 				}
 			});
@@ -199,9 +199,9 @@ function home(agentId){
 					for(var i = 0; i < data2.length; i++){
 						$("#LodgingTable").append('<tr id="'+data2[i].id+'">'
 						+'<td style="min-width: 200px" class="name">'+data2[i].name+'</td>'
-						+'<td><a class="view" href="/lodging.html?id='+data2[i].id+'"><img src="img/view.gif"/></a>'
-						+'<td><a class="edit" href="/lodging/'+data2[i].id+'"><img src="img/edit.gif"/></a>'
-						+'<td><a class="delete" href="/lodging/'+data2[i].id+'"><img src="img/remove.gif"/></a>'
+						+'<td><a class="view" href="/lodging.html?id='+data2[i].id+'"><img src="img/view.gif"/></a></td>'
+						+'<td><a class="edit" href="/lodging/'+data2[i].id+'"><img src="img/edit.gif"/></a></td>'
+						+'<td><a class="delete" href="/lodging/'+data2[i].id+'"><img src="img/remove.gif"/></a></td>'
 						+'</tr>');
 					}
 				}
@@ -229,7 +229,7 @@ $(document).on('click', "#addLgg", function(e){
 	        +'</div><br>'
 	        +'<script type="text/javascript" src="scripts/imgur.js"></script>'
 	        +'<script type="text/javascript" src="scripts/upload.js"></script>'
-			+'<label>Name: </label><input type="text" class="form-control" id="lodgingName" placeholder="Name">'
+			+'<label>Name: </label><input type="text" class="form-control" id="lodgingName" onkeyup="this.value=this.value.replace(/[\\d]/,\'\')" placeholder="Name">'
 			+'<label>Address: </label><input type="text" class="form-control" id="lodgingAddress" placeholder="Address">'
 			+'<label>Description: </label><input type="text" class="form-control" id="lodgingDescription" placeholder="Description">'
 			+'<label>Category: </label><br><input type="number" id="lodgingCategory" min="0" max="5" placeholder="Min: 0; Max: 5"><br>'
@@ -287,11 +287,11 @@ $(document).on('click',"#editLodging", function(e){
 	var addr = $("#lodgingAddressEdit").val();
 	var description = $("#lodgingDescriptionEdit").val();
 	var numberOfBeds = $("#lodgingNumberOfBedsEdit").val();
-	var tmp = document.getElementById("lodgingType");
+	var tmp = document.getElementById("lodgingTypeEdit");
 	var lodgingType = tmp.options[tmp.selectedIndex].value;
-	var tmp = document.getElementById("lodgingMeal");
+	var tmp = document.getElementById("lodgingMealEdit");
 	var lodgingMeal = tmp.options[tmp.selectedIndex].value;
-	var category = $("lodgingCategoryEdit").val();
+	var category = $("#lodgingCategoryEdit").val();
 	var selected = [];
 	$('input:checked').each(function() {
 	    selected.push($(this).attr('name'));
@@ -340,13 +340,6 @@ $(document).on("click","#addLodging",function(e){
 	    selected.push($(this).attr('name'));
 	});
 
-/*
-	console.log(lodgingType);
-	console.log(lodgingMeal); //id from the db
-	console.log(selected);		//list of ^
-*/	
-
-
 	var imagePaths = [];
 	var links = $('#imagelink').val().substring(1).split(';');
 	links.forEach(function(link){
@@ -373,17 +366,8 @@ $(document).on("click","#addLodging",function(e){
         dataType: "text",
 		data: json, 
 		success: function(data){
-			console.log(data);
-
-			$("#LodgingTable").append('<tr id="'+data.id+'">'
-					+'<td style="min-width: 200px" class="name">'+data.name+'</td>'
-					+'<td><a class="view" href="/lodging.html?id='+data.id+'"><img src="img/view.gif"/></a>'
-					+'<td><a class="edit" href="/lodging/'+data.id+'"><img src="img/edit.gif"/></a>'
-					+'<td><a class="delete" href="/lodging/'+data.id+'"><img src="img/remove.gif"/></a>'
-					+'</tr>');
-
-			
 			$("#addModal").modal('toggle');
+			window.location.replace('/home.html');
 		}
 	});
     
