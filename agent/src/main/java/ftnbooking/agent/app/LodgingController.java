@@ -48,6 +48,8 @@ public class LodgingController {
 	@GetMapping("/agent/{id}")
 		public ResponseEntity<?> getMyLodgings(@PathVariable Long id){
 		List<Lodging> lodgings = lodgingServiceLocal.findByAgentId(id);
+		System.out.println("LODGINGSI");
+		//System.out.println(lodgings);s
 		return new ResponseEntity<>(lodgings, HttpStatus.OK);
 	}
 

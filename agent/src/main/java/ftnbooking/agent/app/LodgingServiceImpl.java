@@ -54,13 +54,17 @@ public class LodgingServiceImpl implements LodgingServiceLocal{
 		List<Reservation> reservations = lodgingService.synchronizeReservation(user);
 		List<Price> prices = lodgingService.synchronizePrice(user);
 		List<Message> messages = lodgingService.synchronizeMessage(user);
-		lodgingRepository.deleteAll();
+		//System.out.println(lodgings);
+		//priceRepository.deleteAll();
+		//messageRepository.deleteAll();
+		//reservationRepository.deleteAll();
+		//lodgingRepository.deleteAll();
 		lodgingRepository.saveAll(lodgings);
-		reservationRepository.deleteAll();
+		
 		reservationRepository.saveAll(reservations);
-		priceRepository.deleteAll();
+		
 		priceRepository.saveAll(prices);
-		messageRepository.deleteAll();
+		
 		messageRepository.saveAll(messages);
 	}
 
