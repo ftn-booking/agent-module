@@ -62,6 +62,7 @@ public class LodgingController {
 	@PostMapping("/{id}")
 	public ResponseEntity<?> updateLodging(@PathVariable Long id, @RequestBody LodgingDTO lodgingDTO){
 		Lodging l = lodgingServiceLocal.findOne(id);
+		System.out.println(l);
 		l.setName(lodgingDTO.getName());
 		l.setAddress(lodgingDTO.getAddress());
 		l.setDescription(lodgingDTO.getDescription());
