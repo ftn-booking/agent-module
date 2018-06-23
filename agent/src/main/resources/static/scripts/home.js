@@ -1,18 +1,18 @@
 var t1 = "";
 $(document).ready(function(){
-	var mail = Cookies.get('user');
-	
+	var mail = localStorage.getItem('user');
+	var tt = window.location.protocol + '//' + window.location.hostname+':8080';
 	$.get({
-		url: 'https://localhost:8080/api/authentication/'+mail,
+		url: tt+'/api/authentication/'+mail,
 		success: function(data){
 
-			if(data.userType != "AGENT"){	//doesn't allow non agents to log in and access home
-				Cookies.remove('token', {path: '/'});
-				Cookies.remove('user', {path: '/'});
-				Cookies.remove('agent', {path: '/'});
+			if(data.userType != "AGENT"){
+				localStorage.removeItem('data');
+				localStorage.removeItem('user');
 				window.location.replace('/login.html'); 
 			} else {
-				$('#firstName').append(data.name);
+				$('#firstName').append('&nbsp;&nbsp;&nbsp;<button onclick="logout()" >Logout</button>&nbsp;&nbsp;&nbsp;&nbsp;<button id="chpw">Change Password</button>&nbsp;&nbsp;&nbsp;&nbsp;' + data.name);
+				
 				sync(mail);
 				home(data.id);
 			}
@@ -61,6 +61,7 @@ function editLodging(url){
 					+'<label>Name: </label><input type="text" class="form-control" id="lodgingNameEdit" placeholder="Name">'
 					+'<label>Address: </label><input type="text" class="form-control" id="lodgingAddressEdit" placeholder="Address">'
 					+'<label>Description: </label><input type="text" class="form-control" id="lodgingDescriptionEdit" placeholder="Description">'
+					+'<label>Category: </label><br><input type="number" id="lodgingCategoryEdit" min="0" max="5" placeholder="Min: 0; Max: 5"><br>'
 					+'<label>Number&nbsp;of&nbsp;beds: </label><br><input type="number" id="lodgingNumberOfBedsEdit" min="1" placeholder="Min: 1"><br>'
 					+'<br><label style="width: 100px">Type: </label><select id="lodgingType">'
 					+'</select><br>'
@@ -71,6 +72,7 @@ function editLodging(url){
 			$("#lodgingAddressEdit").val(lodging.address);
 			$("#lodgingDescriptionEdit").val(lodging.description);
 			$("#lodgingNumberOfBedsEdit").val(lodging.numberOfBeds);
+			$("#lodgingCategoryEdit").val(lodging.category);
 			
 			var lodgingTypes = "";
 			$.get({
@@ -123,6 +125,47 @@ function editLodging(url){
 	$("#editModal").modal();
 }
 
+$(document).on("click", "#chpw", function(e){
+	e.preventDefault();
+	$("#change-modal-body").empty();
+	$("#change-modal-body").append(''
+			+'<label>Current&nbsp;password: </label><br><input id="cpw" type="password"><br>'
+			+'<label>New&nbsp;password: </label><br><input id="npw" type="password"><br>'
+			+'<label>Confirm&nbsp;new&nbsp;password: </label><br><input id="rpw" type="password"><br>'
+	);
+	$("#changeModal").modal();
+});
+
+$(document).on("click", "#changePassword", function(e){
+	e.preventDefault();
+	var cpw = $("#cpw").val();
+	var npw = $("#npw").val();
+	var rpw = $("#rpw").val();
+	if(npw === cpw){
+		alert('New password cannot be the same as current password');
+		return;
+	}
+	if(npw !== rpw){
+		alert('Confirmation failed');
+		return;
+	}
+	
+	$.post({
+		url: "/agent/"+localStorage.getItem('user'),
+	contentType: "application/json",
+    dataType: "text",
+	data: JSON.stringify({
+		"oldPassword": cpw,
+		"newPassword": npw
+	}),
+	success: function(){
+		alert('Password successfully changed!');
+		$("#changeModal").modal('toggle');
+	}
+	})
+	
+});
+
 $(document).on("click", ".delete", function(e){
 	e.preventDefault();	
 	highlightRow(this);
@@ -144,7 +187,7 @@ $(document).on("click", ".delete", function(e){
 
 function home(agentId){
 	$("#middle").empty();
-	$("#middle").append('<button type="button" id="addLgg" class="btn btn-primary">'
+	$("#middle").append('<button type="button" id="addLgg" class="btn btn-secondary">'
 			+'Add Lodging</button>'
 			+'<br><div id="formContainer"><table id="LodgingTable" class="table"></table></div>');
 			$("#LodgingTable").html('<tr class="header"><th>Name</th><th width="30px"></th><th width="30px"></th><th width="30px"></th></tr>');
@@ -189,10 +232,11 @@ $(document).on('click', "#addLgg", function(e){
 			+'<label>Name: </label><input type="text" class="form-control" id="lodgingName" placeholder="Name">'
 			+'<label>Address: </label><input type="text" class="form-control" id="lodgingAddress" placeholder="Address">'
 			+'<label>Description: </label><input type="text" class="form-control" id="lodgingDescription" placeholder="Description">'
+			+'<label>Category: </label><br><input type="number" id="lodgingCategory" min="0" max="5" placeholder="Min: 0; Max: 5"><br>'
 			+'<label>Number&nbsp;of&nbsp;beds: </label><br><input type="number" id="numberOfBeds" min="1" placeholder="Min: 1"><br>'
-			+'<br><label>Type: </label><select id="lodgingType">'
+			+'<br><label style="width: 100px">Type: </label><select  id="lodgingType">'
 			+'</select><br>'
-			+'<label>Meal: </label><select id="lodgingMeal">'
+			+'<label style="width: 100px">Meal: </label><select id="lodgingMeal">'
 			+'</select><br>');
 	
 	
@@ -212,7 +256,7 @@ $(document).on('click', "#addLgg", function(e){
 		url:"/lodging/getFeatureTypes",
 		success: function(data){
 			for(var i = 0; i < data.length; i++)
-				featureTypes+='<label>'+data[i].name+': </label><input type="checkbox" name="'+data[i].id+'" value="'+data[i].name+'"><br>'
+				featureTypes+='<label style="width: 100px">'+data[i].name+': </label><input type="checkbox" name="'+data[i].id+'" value="'+data[i].name+'"><br>'
 			$("#add-modal-body").append(featureTypes);
 			//$("#addForm").append('<input type="submit" value="Submit">'
 			//		+'');
@@ -236,16 +280,18 @@ $(document).on('click', "#addLgg", function(e){
 	$("#addModal").modal();
 });
 
+
 $(document).on('click',"#editLodging", function(e){
 	e.preventDefault();
 	var name = $('#lodgingNameEdit').val();
 	var addr = $("#lodgingAddressEdit").val();
 	var description = $("#lodgingDescriptionEdit").val();
-	var numberOfBeds = $("#lodgingNumberOfBeds").val();
+	var numberOfBeds = $("#lodgingNumberOfBedsEdit").val();
 	var tmp = document.getElementById("lodgingType");
 	var lodgingType = tmp.options[tmp.selectedIndex].value;
 	var tmp = document.getElementById("lodgingMeal");
 	var lodgingMeal = tmp.options[tmp.selectedIndex].value;
+	var category = $("lodgingCategoryEdit").val();
 	var selected = [];
 	$('input:checked').each(function() {
 	    selected.push($(this).attr('name'));
@@ -256,18 +302,15 @@ $(document).on('click',"#editLodging", function(e){
 		"address": addr,
 		"description": description,
 		"numberOfBeds": numberOfBeds,
-//		"category": ff,
-//		"rating": rat ,
+		"category": category,
 		"lodgingType": lodgingType,
 		"foodServiceType": lodgingMeal,
 		"featureType": selected,
-		"imagePaths": imagePaths//,
-//		"agent": Cookies.get('user')
+		//"imagePaths": imagePaths
 	});
 
 	
- 	$.ajax({
-		type: "PUT",
+ 	$.post({
 		url: t1,
 		contentType: "application/json",
         dataType: "text",
@@ -291,6 +334,7 @@ $(document).on("click","#addLodging",function(e){
 	var lodgingType = tmp.options[tmp.selectedIndex].value;
 	var tmp = document.getElementById("lodgingMeal");
 	var lodgingMeal = tmp.options[tmp.selectedIndex].value;
+	var category = $("#lodgingCategory").val();
 	var selected = [];
 	$('input:checked').each(function() {
 	    selected.push($(this).attr('name'));
@@ -309,28 +353,37 @@ $(document).on("click","#addLodging",function(e){
 		imagePaths.push(link);
 	});
 
-	var ff = 1; //temporary 
 	var rat = null;
 	var json = JSON.stringify({
 		"name": name,
 		"address": addr,
 		"description": description,
 		"numberOfBeds": numberOfBeds,
-		"category": ff,
+		"category": category,
 		"rating": rat ,
 		"lodgingType": lodgingType,
 		"foodServiceType": lodgingMeal,
 		"featureType": selected,
 		"imagePaths": imagePaths,
-		"agent": Cookies.get('user')
+		"agent": localStorage.getItem('user')
 	});
 	$.post({
 		url: "/lodging/add",
         contentType: "application/json",
         dataType: "text",
 		data: json, 
-		success: function(lodging){
-			console.log(lodging);
+		success: function(data){
+			console.log(data);
+
+			$("#LodgingTable").append('<tr id="'+data.id+'">'
+					+'<td style="min-width: 200px" class="name">'+data.name+'</td>'
+					+'<td><a class="view" href="/lodging.html?id='+data.id+'"><img src="img/view.gif"/></a>'
+					+'<td><a class="edit" href="/lodging/'+data.id+'"><img src="img/edit.gif"/></a>'
+					+'<td><a class="delete" href="/lodging/'+data.id+'"><img src="img/remove.gif"/></a>'
+					+'</tr>');
+
+			
+			$("#addModal").modal('toggle');
 		}
 	});
     

@@ -5,11 +5,11 @@
     <title>Login</title>
 
     <script src="scripts/jquery-3.3.1.min.js"></script>
-	<script src="scripts/jscookie.js"></script>
-    <script src="scripts/home.js"></script>
+	<script src="scripts/home.js"></script>
     <script src="scripts/toastr.min.js"></script>
 	<script src="scripts/bootstrap.min.js"></script>
-
+	<script src="scripts/logout.js"></script>
+	
     <link href="css/bootstrap.min.css" rel="stylesheet"/>
     <link href="css/lodging.css" rel="stylesheet"/>
     <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" id="toastr-css"/>
@@ -21,7 +21,9 @@
 
 </head>
 <body>
-<p id="firstName">Hello </p>
+<div id="top" style="direction: rtl">
+<p id="firstName"></p>
+</div>
 <div id="middle">
 
 </div>
@@ -49,7 +51,6 @@
 		</div>
 	</div>
 
-</div>
 	<div class="formContainer">
 		<div class="modal fade" id="editModal" tabindex="-1" role="dialog">
 			<div class="modal-dialog" role="document">
@@ -60,9 +61,9 @@
 							<span aria-hidden="true">&times;</span>
 						</button>
 					</div>
-					<form id="addForm">
+					<form id="editForm">
 						<div class="add-modal-body" id="edit-modal-body">
-							<input type="hidden" name="id" id="id"/>
+							<input type="hidden" name="id" id="idEdit"/>
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -74,6 +75,29 @@
 		</div>
 	</div>
 
+	<div class="formContainer">
+		<div class="modal fade" id="changeModal" tabindex="-1" role="dialog">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="changeModalLabel">Change Password</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<form id="changeForm">
+						<div class="add-modal-body" id="change-modal-body">
+							<input type="hidden" name="id" id="idChange	"/>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+							<button type="button" class="btn btn-primary" id="changePassword">Confirm</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
 
 </body>
 </html>

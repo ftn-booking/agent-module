@@ -1,20 +1,19 @@
 var t1 = "";
 $(document).ready(function(){
 	
-	var mail = Cookies.get('user');
-	
+	var mail = localStorage.getItem('user');
+	var tt = window.location.protocol + '//' + window.location.hostname+':8080';
+
 	$.get({
-		url: 'https://localhost:8080/api/authentication/'+mail,
+		url: tt + '/api/authentication/' + mail,
 		success: function(data){
 
 			if(data.userType != "AGENT"){	//doesn't allow non agents to log in and access home
-				Cookies.remove('token', {path: '/'});
-				Cookies.remove('user', {path: '/'});
-				Cookies.remove('agent', {path: '/'});
+				localStorage.removeItem('user');
+				localStorage.removeItem('token');
+				
 				window.location.replace('/login.html'); 
 			} else {
-				Cookies.set('agent', data, {expires: 10, path: '/', secure: true})
-				//$('p').append(data.name);
 				getLodging();
 			}
 		}, error: function(data){
@@ -37,6 +36,8 @@ function getLodging(){
 			data.featureType.forEach(function(feature){
 				features+=", "+feature.name;
 			});
+			
+			$("#top").html('&nbsp;&nbsp;&nbsp;<button onclick="logout()" >Logout</button>&nbsp;&nbsp;&nbsp;&nbsp;');
 			
 			$("#lodgingData").html('<label>Owner:&nbsp;</label>' + data.agent.name + " " + data.agent.lastName
 					+'<br><label>Name:&nbsp;</label>' + data.name 
@@ -67,7 +68,8 @@ function getLodging(){
 			for(var i = 0; i < d.length; i++){
 				var sD = new Date(d[i].fromDate);
 				var eD = new Date(d[i].toDate);
-				$("#timeFrame").append('<tr><td>'+sD.toString().substring(4,15)+'</td><td>'+eD.toString().substring(4,15)+'</td><td align="right">'+d[i].pricePerDay+'</td></tr>');
+				$("#timeFrame").append('<tr><td>'+sD.toString().substring(4,15)+'</td><td>'+eD.toString().substring(4,15)+'</td><td align="right">'+d[i].pricePerDay+'</td>'
+						+'<td><a href="/price/'+d[i].id+'" class="delete"><img src="img/remove.gif"/></a></td></tr>');
 			}
 		}
 	});
@@ -76,12 +78,12 @@ function getLodging(){
 		url: "/reservation/"+tgt,
 		success: function(x){
 			for(var i = 0; i < x.length; i++){
-				console.log(x[i]);
 				var sD = new Date(x[i].fromDate);
 				var eD = new Date(x[i].toDate);
 				var status = (x[i].approved) ? '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="img/checkmark.png" width="16" height="16">' : '<a class="approve" href="/reservation/'+x[i].id+'">Approve</a>';
 				$("#reservationsTable").append('<tr><td>'+x[i].user.email+'</td><td>'+sD.toString().substring(4,15)	
-						+'</td><td>'+eD.toString().substring(4,15)+'</td><td><a class="msg" href="/messages/'+x[i].id+'">check</a></td><td>'+status+'</td></tr>');
+						+'</td><td>'+eD.toString().substring(4,15)+'</td><td><a class="msg" href="/messages/'+x[i].id+'">check</a></td><td>'+status+'</td>'
+						+'<td><a class="delete" href="/reservation/'+x[i].id+'"><img src="img/remove.gif"></a></td></tr>');
 			}
 		}
 	});
@@ -116,10 +118,9 @@ $(document).on("click", ".msg", function(e){
 	$.get({
 		url: url,
 		success: function(data){
-			console.log(data);
 			for(var i = 0; i < data.length; i++){
 				var ft = (data[i].userSent == true) ? "From" : "To";
-				$("#messagesHere").append('<div><p>'+ft+' '+data[i].user.name+' ['+data[i].user.email+']: '+data[i].content+'<p><div>');
+				$("#messagesHere").append('<div><p>'+ft+' '+data[i].user.name+' ['+data[i].user.email+']: '+data[i].content+'<p><div><hr>');
 			}
 		}
 	})
@@ -127,6 +128,25 @@ $(document).on("click", ".msg", function(e){
 	
 	$("#messageModal").modal();
 })
+
+$(document).on("click", ".delete", function(e){
+	e.preventDefault();
+	var confirmed = confirm("Are you sure?");
+	if (confirmed){
+		var url = $(this).attr("href");
+		tr_parent = $(this).closest("tr");
+		$.ajax({
+			type: "DELETE",
+			url: url,
+			success: function(){
+				tr_parent.remove();
+			}
+		});
+
+	}
+});
+
+
 
 var lodging = '';
 $(document).on('click','#priceRange',function(e){
@@ -144,6 +164,12 @@ $(document).on('click',"#sendMessage", function(e){
 	e.preventDefault();
 	var content = $("#msgResponse").val();
 	var reservation = resID;
+	
+	if(content === ""){
+		$("#messageModal").modal("toggle");
+		return;
+	}
+	
 	$.post({
 		url: "/messages",
 		contentType: "application/json",

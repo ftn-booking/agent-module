@@ -5,10 +5,10 @@
 
     <meta charset="UTF-8">
 	<script src="scripts/jquery-3.3.1.min.js"></script>
-	<script src="scripts/jscookie.js"></script>
 	<script src="scripts/bootstrap.min.js"></script>
 	<script src="scripts/lodging.js"></script>
-
+	<script src="scripts/logout.js"></script>
+	
     <link href="css/bootstrap.min.css" rel="stylesheet"/>
     <link href="css/lodging.css" rel="stylesheet"/>
 
@@ -17,28 +17,32 @@
 
 <body>
 <div>
-	
-	<div style="float: right; width:99%">
-		<div id="lodgingData" >
-	
-		</div>
-
-		<div id="tables" >
-		 	<div id="leftTable" style="float: left; width:50%">
-			<div id="leftButton"></div><br>
-				<table id="timeFrame">
-					<tr id="mid"><th>Start Date</th><th>End Date</th><th>Price</th></tr>
-				</table>
+	<div style="width:100%">
+	<div id="top" style="direction: rtl">
+	</div>
+		<div style="width:2%"></div>
+		<div style="width:98%">
+			<div id="lodgingData" >
+		
 			</div>
-			
-			<div id="rightTable" style="float: right; width:50%">
-			<div id="rightButton"></div><br>
-				<table id="reservationsTable">
-					<tr id="mid"><th>Who</th><th>Start Date</th><th>End Date</th><th>Messages</th><th>Approved</th></tr>
-				</table>
-			
+	
+			<div id="tables" >
+			 	<div id="leftTable" style="float: left; width:50%">
+				<div id="leftButton"></div><br>
+					<table id="timeFrame">
+						<tr id="mid"><th>Start Date</th><th>End Date</th><th>Price</th><th></th></tr>
+					</table>
+				</div>
+				
+				<div id="rightTable" style="float: right; width:50%">
+				<div id="rightButton"></div><br>
+					<table id="reservationsTable">
+						<tr id="mid"><th>Who</th><th>Start Date</th><th>End Date</th><th>Messages</th><th>Approved</th><th></th></tr>
+					</table>
+				
+				</div>
+				
 			</div>
-			
 		</div>
 	</div>
 	<div class="formContainer">

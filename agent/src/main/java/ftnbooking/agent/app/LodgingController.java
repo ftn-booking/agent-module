@@ -59,18 +59,21 @@ public class LodgingController {
 		return new ResponseEntity<>(lodging, HttpStatus.OK);
 	}
 	
-	@PutMapping("/{id}")
+	@PostMapping("/{id}")
 	public ResponseEntity<?> updateLodging(@PathVariable Long id, @RequestBody LodgingDTO lodgingDTO){
 		Lodging l = lodgingServiceLocal.findOne(id);
-		l.setAddress(lodgingDTO.getAddress());
 		l.setName(lodgingDTO.getName());
+		l.setAddress(lodgingDTO.getAddress());
 		l.setDescription(lodgingDTO.getDescription());
 		l.setNumberOfBeds(lodgingDTO.getNumberOfBeds());
+		l.setCategory(lodgingDTO.getCategory());
 		l.setFoodServiceType(foodServiceTypeService.findOne(lodgingDTO.getFoodServiceType()));
 		l.setLodgingType(lodgingTypeService.findOne(lodgingDTO.getLodgingType()));
 		l.setFeatureType(features(lodgingDTO.getFeatureType()));
-		/*TODO: UPDATE*/
-		return new ResponseEntity<>(l,HttpStatus.OK);
+		System.out.println(l);
+		Long v = lodgingService.addLodging(l);
+		System.out.println(v + " " + id);
+		return new ResponseEntity<>(lodgingServiceLocal.add(l),HttpStatus.OK);
 	}
 	
 	
