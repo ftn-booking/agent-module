@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import ftnbooking.agent.soap.Lodging;
+import ftnbooking.agent.soap.Price;
 import ftnbooking.agent.soap.Reservation;
 import ftnbooking.agent.soap.ReservationRepository;
 
@@ -38,6 +39,15 @@ public class ReservationServiceImpl implements ReservationServiceLocal{
 		if(reservations == null || reservations.isEmpty())
 			// There are no other prices for this lodging at specified time
 			return true;
+		return false;
+	}
+
+	@Override
+	public boolean validate(Price p) {
+		List<Reservation> reservations = reservationRepository.findByToDateGreaterThanAndFromDateLessThan(p.getFromDate(), p.getToDate());
+		if(reservations.isEmpty()) {
+			return true;
+		}
 		return false;
 	}
 	

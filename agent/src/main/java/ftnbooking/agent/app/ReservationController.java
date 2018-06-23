@@ -5,6 +5,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import ftnbooking.agent.soap.ApplicationUser;
+import ftnbooking.agent.soap.ApplicationUserType;
 import ftnbooking.agent.soap.LodgingService;
 import ftnbooking.agent.soap.Reservation;
 
@@ -27,12 +29,21 @@ public class ReservationController {
 	@PostMapping
 	public ResponseEntity<?> addReservation(@RequestBody ReservationDTO rDTO){
 		Reservation r = new Reservation();
-		r.setUser(userServiceLocal.findByEmail(rDTO.getUser()));
+		ApplicationUser appUser = userServiceLocal.findByEmail(rDTO.getUser());
+		if(appUser.getUserType().equals(ApplicationUserType.VISITOR)) {
+			r.setUser(appUser);
+		}
+		else if(appUser.equals(lodgingServiceLocal.findOne(rDTO.getLodging()).getAgent())) {
+			r.setUser(appUser);
+		}
+		else {
+			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+		}
 		r.setFromDate(rDTO.getFromDate().getTime());
 		r.setToDate(rDTO.getToDate().getTime());
 		r.setLodging(lodgingServiceLocal.findOne(rDTO.getLodging()));
 		r.setRating(rDTO.getRating());
-		r.setRating(4); //XXX: temporary
+		r.setRating(null); //XXX: temporary
 		r.setId(lodgingService.reserveLodging(r));
 		return new ResponseEntity<>(reservationServiceLocal.add(r), HttpStatus.OK);
 	}
@@ -49,6 +60,16 @@ public class ReservationController {
 		Long res = lodgingService.realizeReservation(r);
 		if(id == res) {
 			reservationServiceLocal.add(r); 
+			return new ResponseEntity<>(HttpStatus.OK);
+		}
+		return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+	}
+	
+	@DeleteMapping("/{id}")
+	public ResponseEntity<?> delete(@PathVariable Long id) {
+		Reservation r = reservationServiceLocal.findOne(id);
+		if(!r.isApproved() && r.getLodging().getAgent().equals(r.getUser())) {
+			lodgingService.deleteReservation(r);
 			return new ResponseEntity<>(HttpStatus.OK);
 		}
 		return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

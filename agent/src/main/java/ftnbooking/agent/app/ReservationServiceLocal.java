@@ -3,6 +3,7 @@ package ftnbooking.agent.app;
 import java.util.List;
 
 import ftnbooking.agent.soap.Lodging;
+import ftnbooking.agent.soap.Price;
 import ftnbooking.agent.soap.Reservation;
 
 public interface ReservationServiceLocal {
@@ -14,4 +15,6 @@ public interface ReservationServiceLocal {
 	Reservation add(Reservation r);
 	
 	boolean validate(Reservation r);
+	
+	boolean validate(Price p);
 }

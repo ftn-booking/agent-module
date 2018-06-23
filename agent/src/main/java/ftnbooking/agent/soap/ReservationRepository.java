@@ -14,4 +14,5 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
 			long currentFromDate,
 			long currentToDate);
 	List<Reservation> findByLodging(Lodging lodging);
+	List<Reservation> findByToDateGreaterThanAndFromDateLessThan(long currentFromDate, long currentToDate);
 }
