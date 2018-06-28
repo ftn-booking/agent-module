@@ -69,6 +69,7 @@ public class TestData {
 		lodgingTypeService.addAll(lts);
 		applicationUserRepository.deleteAll();
 		applicationUserRepository.saveAll(aus);
+		
 	}
 	
 }

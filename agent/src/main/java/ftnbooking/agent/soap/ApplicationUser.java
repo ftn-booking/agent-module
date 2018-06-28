@@ -55,7 +55,8 @@ public class ApplicationUser {
 	
 	@XmlElement()
 	private String pid;
-	
+	@JsonIgnore
+	private int failedLoginAttempts = 0;
 	@JsonIgnore
 	private String resetToken = UUID.randomUUID().toString();
 	
@@ -183,6 +184,22 @@ public class ApplicationUser {
 
 	public void setActive(boolean active) {
 		this.active = active;
+	}
+
+	public String getPid() {
+		return pid;
+	}
+
+	public void setPid(String pid) {
+		this.pid = pid;
+	}
+
+	public int getFailedLoginAttempts() {
+		return failedLoginAttempts;
+	}
+
+	public void setFailedLoginAttempts(int failedLoginAttempts) {
+		this.failedLoginAttempts = failedLoginAttempts;
 	}
 	
 	
