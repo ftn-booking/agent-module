@@ -5,12 +5,15 @@ $(document).ready(function(){
 	var tt = window.location.protocol + '//' + window.location.hostname+':8080';
 
 	$.get({
-		url: tt + '/api/authentication/' + mail,
+		url: tt + '/api/authentication',
+		headers: {
+			"Authorization":"Bearer " + localStorage.getItem('data')
+		},
 		success: function(data){
 
-			if(data.userType != "AGENT"){	//doesn't allow non agents to log in and access home
+			if(data.userType != "AGENT" || data.email != mail){
 				localStorage.removeItem('user');
-				localStorage.removeItem('token');
+				localStorage.removeItem('data');
 				
 				window.location.replace('/login.html'); 
 			} else {

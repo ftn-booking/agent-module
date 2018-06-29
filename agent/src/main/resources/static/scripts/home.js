@@ -3,7 +3,10 @@ $(document).ready(function(){
 	var mail = localStorage.getItem('user');
 	var tt = window.location.protocol + '//' + window.location.hostname+':8080';
 	$.get({
-		url: tt+'/api/authentication/'+mail,
+		url: tt+'/api/authentication',
+		headers: {
+			"Authorization":"Bearer " + localStorage.getItem('data')
+		},
 		success: function(data){
 
 			if(data.userType != "AGENT"){
@@ -13,7 +16,6 @@ $(document).ready(function(){
 			} else {
 				$('#firstName').append('&nbsp;&nbsp;&nbsp;<button onclick="logout()" >Logout</button>&nbsp;&nbsp;&nbsp;&nbsp;<button id="chpw">Change Password</button>&nbsp;&nbsp;&nbsp;&nbsp;' + data.name);
 				
-				sync(mail);
 				home(data.id);
 			}
 		}, error: function(data){
@@ -25,16 +27,6 @@ $(document).ready(function(){
 	});
 	
 });
-
-function sync(mail){
-	$.post({
-		url: "/lodging/synchronize/"+mail,
-		success: function(data){
-			//home();
-		}
-	});	
-	
-}
 
 $(document).on("click", ".edit", function(e){
 	e.preventDefault();

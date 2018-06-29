@@ -53,7 +53,7 @@ public class LodgingServiceImpl implements LodgingServiceLocal{
 		List<Message> messages = lodgingService.synchronizeMessage(user);
 		//System.out.println(lodgings);
 		//priceRepository.deleteAll();
-		//messageRepository.deleteAll();
+		messageRepository.deleteAll();
 		//reservationRepository.deleteAll();
 		//lodgingRepository.deleteAll();
 		lodgingRepository.saveAll(lodgings);
@@ -61,7 +61,7 @@ public class LodgingServiceImpl implements LodgingServiceLocal{
 		reservationRepository.saveAll(reservations);
 		
 		priceRepository.saveAll(prices);
-		
+
 		messageRepository.saveAll(messages);
 	}
 

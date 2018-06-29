@@ -18,7 +18,7 @@ $(function() {
             }), success: function(data){
             		localStorage.setItem('data', data);
             		localStorage.setItem('user', email);
-					
+					sync(email);
 					setTimeout(function(){window.location.replace('/home.html');}, 350);
 					//window.location.replace('/home.html');
             }, error: function(data){
@@ -32,3 +32,12 @@ $(function() {
     });
 
 });
+
+function sync(mail){
+	$.post({
+		url: "/lodging/synchronize/"+mail,
+		success: function(data){
+		}
+	});	
+	
+}
